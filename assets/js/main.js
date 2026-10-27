@@ -1,11 +1,15 @@
 /**
  * Mohammed Salal KK - Portfolio Scripts
- * Interactive Terminal, Project Filters, Modals, Counters, and Smooth Navigation
+ * Modern Motion Design, Typewriter Rotator, Scroll Animations, Interactive Accordion & Terminal
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
+  initTypewriter();
+  initScrollAnimations();
   initCounters();
+  initCompetencyFilters();
+  initExperienceAccordion();
   initTerminal();
   initProjects();
   initModal();
@@ -23,20 +27,18 @@ function initNavbar() {
   const navLinks = document.querySelectorAll('.desktop-nav-link');
   const sections = document.querySelectorAll('section[id]');
 
-  // Glass effect on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
-      navbar.classList.add('bg-[#060913]/90', 'backdrop-blur-md', 'border-b', 'border-slate-800/80', 'shadow-2xl');
+      navbar.classList.add('bg-[#070b16]/90', 'backdrop-blur-md', 'border-b', 'border-slate-800/80', 'shadow-2xl');
       navbar.classList.remove('bg-transparent');
     } else {
-      navbar.classList.remove('bg-[#060913]/90', 'backdrop-blur-md', 'border-b', 'border-slate-800/80', 'shadow-2xl');
+      navbar.classList.remove('bg-[#070b16]/90', 'backdrop-blur-md', 'border-b', 'border-slate-800/80', 'shadow-2xl');
       navbar.classList.add('bg-transparent');
     }
 
-    // Scroll spy
     let currentSection = '';
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
+      const sectionTop = section.offsetTop - 130;
       const sectionHeight = section.offsetHeight;
       if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
         currentSection = section.getAttribute('id');
@@ -51,7 +53,6 @@ function initNavbar() {
     });
   });
 
-  // Mobile menu toggle
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
       const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
@@ -69,7 +70,80 @@ function initNavbar() {
 }
 
 /* ==========================================================================
-   2. STATS COUNTER ANIMATION
+   2. DYNAMIC HERO TYPEWRITER / ROTATING TITLES
+   ========================================================================== */
+function initTypewriter() {
+  const el = document.getElementById('hero-typewriter');
+  if (!el) return;
+
+  const titles = [
+    'MIS & Data Analyst',
+    'Retail Analytics Expert',
+    'BI & SQL Specialist',
+    'Big Data Graduate'
+  ];
+
+  let titleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 90;
+
+  function type() {
+    const currentTitle = titles[titleIndex];
+
+    if (isDeleting) {
+      el.textContent = currentTitle.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 45;
+    } else {
+      el.textContent = currentTitle.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 95;
+    }
+
+    if (!isDeleting && charIndex === currentTitle.length) {
+      // Pause at end of title
+      typingSpeed = 2200;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      titleIndex = (titleIndex + 1) % titles.length;
+      typingSpeed = 400;
+    }
+
+    setTimeout(type, typingSpeed);
+  }
+
+  type();
+}
+
+/* ==========================================================================
+   3. SCROLL-DRIVEN ENTRANCE ANIMATIONS (INTERSECTION OBSERVER)
+   ========================================================================== */
+function initScrollAnimations() {
+  const revealElements = document.querySelectorAll('.reveal-init');
+  if (!revealElements.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+        // If element has proficiency bars, trigger their animation
+        const bars = entry.target.querySelectorAll('.progress-bar-fill');
+        bars.forEach(bar => {
+          const targetWidth = bar.getAttribute('data-width') || '0%';
+          bar.style.width = targetWidth;
+        });
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
+/* ==========================================================================
+   4. STATS COUNTER ANIMATION
    ========================================================================== */
 function initCounters() {
   const counters = document.querySelectorAll('.counter-val');
@@ -88,7 +162,6 @@ function initCounters() {
           function updateCounter(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease-out cubic
             const easeOut = 1 - Math.pow(1 - progress, 3);
             const currentVal = Math.floor(easeOut * target);
 
@@ -114,7 +187,93 @@ function initCounters() {
 }
 
 /* ==========================================================================
-   3. INTERACTIVE SQL & ANALYTICS TERMINAL
+   5. INTERACTIVE COMPETENCY FILTERS & PROGRESS BARS
+   ========================================================================== */
+function initCompetencyFilters() {
+  const tabs = document.querySelectorAll('.competency-tab');
+  const cards = document.querySelectorAll('.competency-card');
+
+  function animateBarsInCard(card) {
+    const bars = card.querySelectorAll('.progress-bar-fill');
+    bars.forEach(bar => {
+      const w = bar.getAttribute('data-width') || '0%';
+      bar.style.width = w;
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.getAttribute('data-filter');
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-domain');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.classList.remove('opacity-0', 'scale-95');
+            card.classList.add('opacity-100', 'scale-100');
+            animateBarsInCard(card);
+          }, 40);
+        } else {
+          card.classList.add('opacity-0', 'scale-95');
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 200);
+        }
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   6. INTERACTIVE EXPERIENCE ACCORDION
+   ========================================================================== */
+function initExperienceAccordion() {
+  const items = document.querySelectorAll('.accordion-item');
+  const toggleAllBtn = document.getElementById('accordion-toggle-all');
+
+  items.forEach(item => {
+    const trigger = item.querySelector('.accordion-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      item.classList.toggle('active');
+      const expandedLabel = item.querySelector('.accordion-status-label');
+      if (expandedLabel) {
+        expandedLabel.textContent = !isActive ? 'Collapse Details ▲' : 'Explore Details ▼';
+      }
+    });
+  });
+
+  if (toggleAllBtn) {
+    let allExpanded = false;
+    toggleAllBtn.addEventListener('click', () => {
+      allExpanded = !allExpanded;
+      items.forEach(item => {
+        if (allExpanded) {
+          item.classList.add('active');
+        } else {
+          // Keep current role active, collapse others
+          if (item.getAttribute('data-current') !== 'true') {
+            item.classList.remove('active');
+          }
+        }
+        const label = item.querySelector('.accordion-status-label');
+        if (label) {
+          label.textContent = item.classList.contains('active') ? 'Collapse Details ▲' : 'Explore Details ▼';
+        }
+      });
+      toggleAllBtn.textContent = allExpanded ? 'Collapse All Roles' : 'Expand All Roles';
+    });
+  }
+}
+
+/* ==========================================================================
+   7. INTERACTIVE SQL & ANALYTICS TERMINAL
    ========================================================================== */
 function initTerminal() {
   const terminalBody = document.getElementById('terminal-output');
@@ -258,13 +417,11 @@ function initTerminal() {
     history.push(rawInput);
     historyIndex = history.length;
 
-    // Append user command
     const cmdLine = document.createElement('div');
     cmdLine.className = 'flex items-center gap-2 text-slate-400 font-mono text-xs';
     cmdLine.innerHTML = `<span class="text-emerald-400 font-semibold">salal@dubai-analytics:~$</span> <span class="text-white">${escapeHtml(rawInput)}</span>`;
     terminalBody.appendChild(cmdLine);
 
-    // Append response
     const outputDiv = document.createElement('div');
     outputDiv.className = 'mt-1 mb-3 text-xs leading-relaxed';
 
@@ -278,7 +435,6 @@ function initTerminal() {
       terminalBody.appendChild(outputDiv);
     }
 
-    // Scroll to bottom
     const terminalScrollContainer = document.getElementById('terminal-scroll-area');
     if (terminalScrollContainer) {
       terminalScrollContainer.scrollTop = terminalScrollContainer.scrollHeight;
@@ -322,7 +478,7 @@ function escapeHtml(str) {
 }
 
 /* ==========================================================================
-   4. PROJECT FILTERING
+   8. PROJECT FILTERING
    ========================================================================== */
 function initProjects() {
   const filterBtns = document.querySelectorAll('.filter-tab');
@@ -339,11 +495,15 @@ function initProjects() {
         const cardCategories = card.getAttribute('data-category').split(' ');
         if (category === 'all' || cardCategories.includes(category)) {
           card.style.display = 'flex';
-          card.classList.remove('opacity-0', 'scale-95');
-          card.classList.add('opacity-100', 'scale-100');
+          setTimeout(() => {
+            card.classList.remove('opacity-0', 'scale-95');
+            card.classList.add('opacity-100', 'scale-100');
+          }, 30);
         } else {
-          card.style.display = 'none';
           card.classList.add('opacity-0', 'scale-95');
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 200);
         }
       });
     });
@@ -351,7 +511,7 @@ function initProjects() {
 }
 
 /* ==========================================================================
-   5. PROJECT DETAILS MODAL
+   9. PROJECT DETAILS MODAL
    ========================================================================== */
 const projectData = {
   'retail-bi': {
@@ -454,7 +614,6 @@ function initModal() {
     document.getElementById('modal-problem').textContent = data.problem;
     document.getElementById('modal-solution').textContent = data.solution;
 
-    // Tags
     const tagsContainer = document.getElementById('modal-tags');
     tagsContainer.innerHTML = '';
     data.tags.forEach(t => {
@@ -464,7 +623,6 @@ function initModal() {
       tagsContainer.appendChild(span);
     });
 
-    // Impact
     const impactList = document.getElementById('modal-impact');
     impactList.innerHTML = '';
     data.impact.forEach(item => {
@@ -474,7 +632,6 @@ function initModal() {
       impactList.appendChild(li);
     });
 
-    // Links
     const linksContainer = document.getElementById('modal-links');
     linksContainer.innerHTML = '';
 
@@ -548,7 +705,7 @@ function initModal() {
 }
 
 /* ==========================================================================
-   6. CLIPBOARD & TOAST SYSTEM
+   10. CLIPBOARD & TOAST SYSTEM
    ========================================================================== */
 function initClipboardAndToasts() {
   const toast = document.getElementById('toast');
@@ -585,7 +742,6 @@ function initClipboardAndToasts() {
     });
   });
 
-  // Handle contact form submission
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
