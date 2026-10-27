@@ -1,441 +1,1442 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
-    <nav id="desktop-nav">
-      <div class="logo">Mohammed Salal K K</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <!-- <li><a href="#experience">Experience</a></li> -->
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Mohammed Salal K K</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <!-- <li><a href="#experience" onclick="toggleMenu()">Experience</a></li> -->
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
-      </div>
-    </nav>
-    <section id="profile">
-      
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Mohammed Salal</h1>
-        <p class="section__text__p2">Data Analyst</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/MOHAMMED SALAL DATA ANALYST.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://www.linkedin.com/in/mohammed-salal-kk'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/MOHDSALAL-KK'"
-          />
-        </div>
-      </div>
-      <div class="section__pic-container">
-        <img src="./assets/salal-pp.jpg" alt="Mohammed Salal profile picture" class="profile-pic"/>
-      </div>
-    </section>
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/about-pic.png"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>Data Analyst (Feb 2024 – Apr 2025)<br />CodeRythm Technology Pvt Ltd </p>
-              <p>Data Analyst (Mar 2021 – Nov 2022)<br />Homeland Traders Ltd</p>
-            </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>M.Sc. Computer Science Data Analytics<br />(Central University Of Rajasthan)</p>
-              <p>B.Sc. Computer Science <br />(University of Calicut)</p>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Primary Meta Tags -->
+  <title>Mohammed Salal KK | MIS & Data Analyst | Retail & Business Intelligence</title>
+  <meta name="title" content="Mohammed Salal KK | MIS & Data Analyst | Retail & Business Intelligence" />
+  <meta name="description" content="Portfolio of Mohammed Salal KK - MIS & Data Analyst specializing in Retail & E-Commerce, Multi-Branch Operations (19+ Branches), Inventory Stock Aging, SQL, Power BI, Advanced Excel, and Python." />
+  <meta name="keywords" content="Mohammed Salal, Data Analyst Dubai, MIS Analyst UAE, Power BI Retail Dashboard, Retail Inventory Analytics, SQL ETL, Al Madina Group, Business Intelligence Analyst" />
+  <meta name="author" content="Mohammed Salal KK" />
+  <meta name="theme-color" content="#060913" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mohdsalal-kk.github.io/Salal-s-Portfolio/" />
+  <meta property="og:title" content="Mohammed Salal KK | MIS & Data Analyst" />
+  <meta property="og:description" content="Specializing in multi-branch retail analytics, inventory stock aging, SKU rationalization, SQL, Power BI & predictive analytics." />
+  <meta property="og:image" content="assets/salal-pp.jpg" />
+
+  <!-- Tailwind CSS via CDN with customized configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#060913',
+              card: '#0c1220',
+              cyan: '#38bdf8',
+              blue: '#3b82f6',
+              emerald: '#10b981',
+              amber: '#f59e0b'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="bg-[#060913] text-slate-100 antialiased selection:bg-sky-500/30 selection:text-white">
+
+  <!-- =========================================================================
+       NAVIGATION BAR
+       ========================================================================= -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo / Identity -->
+      <a href="#hero" class="group flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 p-[1px] shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition">
+          <div class="w-full h-full bg-[#090e1a] rounded-[11px] flex items-center justify-center">
+            <span class="font-heading font-black text-lg text-sky-400 group-hover:scale-110 transition-transform">S</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-heading font-bold text-base tracking-wide text-white group-hover:text-sky-300 transition">Mohammed Salal KK</span>
+          <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">MIS & Data Analyst • Dubai</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-7 bg-slate-900/60 backdrop-blur-md px-6 py-2 rounded-full border border-slate-800/80 shadow-inner">
+        <a href="#about" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition">About</a>
+        <a href="#competencies" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition">Competencies</a>
+        <a href="#experience" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition">Experience</a>
+        <a href="#projects" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition">Projects</a>
+        <a href="#terminal" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Terminal
+        </a>
+        <a href="#education" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition">Education</a>
+        <a href="#contact" class="desktop-nav-link text-sm text-slate-300 hover:text-sky-400 transition">Contact</a>
+      </nav>
+
+      <!-- Desktop CTA Buttons -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="assets/Mohammed_Salal_Resume.pdf" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-xs font-semibold text-sky-300 hover:text-white transition flex items-center gap-2 shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          CV / Resume
+        </a>
+        <a href="#contact" class="px-4 py-2 rounded-lg bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-xs font-semibold transition shadow-md shadow-sky-500/25">
+          Get in Touch
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" class="lg:hidden p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden mt-3 max-w-7xl mx-auto bg-[#0b1120]/95 backdrop-blur-2xl p-5 rounded-2xl border border-slate-800 shadow-2xl flex flex-col gap-3">
+      <a href="#about" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400 border-b border-slate-800/50">About Me</a>
+      <a href="#competencies" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400 border-b border-slate-800/50">Core Competencies</a>
+      <a href="#experience" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400 border-b border-slate-800/50">Professional Experience</a>
+      <a href="#projects" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400 border-b border-slate-800/50">Featured Projects</a>
+      <a href="#terminal" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400 border-b border-slate-800/50 flex items-center justify-between">
+        <span>Interactive SQL Terminal</span>
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">LIVE</span>
+      </a>
+      <a href="#education" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400 border-b border-slate-800/50">Education & Certifications</a>
+      <a href="#contact" class="mobile-nav-link py-2 text-slate-200 hover:text-sky-400">Contact & Dubai Office</a>
+      
+      <div class="pt-3 flex gap-2">
+        <a href="assets/Mohammed_Salal_Resume.pdf" target="_blank" class="flex-1 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-center text-xs font-semibold text-sky-400">Download CV</a>
+        <a href="#contact" class="mobile-nav-link flex-1 py-2.5 rounded-lg bg-sky-500 text-center text-xs font-semibold text-white">Hire Me</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         HERO SECTION
+         ========================================================================= -->
+    <section id="hero" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden dubai-grid-bg">
+      
+      <!-- Architectural / Technical Glowing Background Gradients -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-sky-600/15 rounded-full blur-[130px] pointer-events-none"></div>
+      <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-blue-600/10 rounded-full blur-[110px] pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Text Column -->
+          <div class="lg:col-span-7 flex flex-col items-start space-y-6">
+            
+            <!-- Location & Visa Status Badge -->
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-sky-500/30 shadow-lg shadow-sky-500/5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-badge"></span>
+              <span class="text-xs font-mono text-slate-300">
+                <strong class="text-white">Dubai, UAE</strong> • Employment Visa Valid • Immediate Availability
+              </span>
+            </div>
+
+            <!-- Main Heading -->
+            <div class="space-y-2">
+              <p class="text-sky-400 font-mono text-sm tracking-wide uppercase">MIS & Data Analyst • Retail & E-Commerce</p>
+              <h1 class="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.15]">
+                Turning Complex Retail Data into <span class="text-gradient">Measurable Growth.</span>
+              </h1>
+            </div>
+
+            <!-- Professional Summary Narrative -->
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+              Retail and e-commerce analyst with <span class="text-white font-medium">3+ years of experience</span>, specializing in inventory health, SKU rationalization, and branch-performance analytics across multi-branch (<span class="text-sky-400 font-medium">19+ branches</span>) and omnichannel operations. Pairs commercial knowledge of purchasing and sales targets with hands-on <span class="text-sky-300 font-semibold">SQL</span>, <span class="text-sky-300 font-semibold">Power BI</span>, <span class="text-sky-300 font-semibold">Advanced Excel</span>, and <span class="text-sky-300 font-semibold">Python</span>.
+            </p>
+
+            <!-- Quick Action CTAs -->
+            <div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
+              <a href="#projects" class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-sm shadow-xl shadow-sky-500/25 transition-all flex items-center justify-center gap-2 group">
+                <span>Explore Dashboards & Projects</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+
+              <a href="assets/Mohammed_Salal_Resume.pdf" target="_blank" class="w-full sm:w-auto text-center px-5 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 text-sky-300 hover:text-white font-semibold text-sm transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Download CV (PDF)</span>
+              </a>
+
+              <a href="#contact" class="w-full sm:w-auto text-center px-5 py-3.5 rounded-xl bg-transparent hover:bg-slate-800/40 border border-slate-800 text-slate-300 hover:text-white font-medium text-sm transition">
+                Contact Me
+              </a>
+            </div>
+
+            <!-- Social & Contact Quick Links -->
+            <div class="flex items-center gap-4 pt-3 text-slate-400">
+              <span class="text-xs font-mono uppercase tracking-wider text-slate-500">Connect:</span>
+              <a href="https://linkedin.com/in/mohammed-salal-kk" target="_blank" aria-label="LinkedIn Profile" class="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-sky-500 hover:text-sky-400 transition">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com/MOHDSALAL-KK" target="_blank" aria-label="GitHub Profile" class="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-sky-500 hover:text-sky-400 transition">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              <button class="copy-email-btn p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-emerald-500 hover:text-emerald-400 transition flex items-center gap-1.5 text-xs font-mono" title="Click to copy email">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span>kkmohdsalal@gmail.com</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Hero Visual / Profile Card -->
+          <div class="lg:col-span-5 flex justify-center lg:justify-end">
+            <div class="relative w-full max-w-md">
+              
+              <!-- Glow backdrop behind card -->
+              <div class="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-3xl blur-2xl opacity-20"></div>
+
+              <!-- Main Glass Profile Card -->
+              <div class="relative bg-slate-900/80 backdrop-blur-xl border border-sky-500/20 rounded-3xl p-6 shadow-2xl overflow-hidden">
+                
+                <!-- Card Header Accent -->
+                <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                  </div>
+                  <span class="text-[11px] font-mono text-sky-400 bg-sky-950/60 px-2.5 py-0.5 rounded-full border border-sky-800/60">
+                    LIVE_ANALYST_NODE
+                  </span>
+                </div>
+
+                <!-- Profile Photo with Dubai Data Overlay -->
+                <div class="relative mt-5 rounded-2xl overflow-hidden border border-slate-700/80 group">
+                  <img src="assets/salal-pp.jpg" alt="Mohammed Salal KK - MIS & Data Analyst" class="w-full h-80 object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                  
+                  <!-- Gradient overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-90"></div>
+
+                  <!-- Floating Metric Tag over image -->
+                  <div class="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-md p-3 rounded-xl border border-sky-500/30 flex items-center justify-between">
+                    <div>
+                      <p class="text-[10px] uppercase font-mono text-slate-400">Current Role</p>
+                      <p class="text-xs font-bold text-white">Al Madina Group • Abu Dhabi</p>
+                    </div>
+                    <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/80 px-2 py-1 rounded border border-emerald-800">
+                      19 Branches
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Live Technical Skills Chips -->
+                <div class="mt-5 space-y-2">
+                  <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                    <span>ANALYTICS ENGINE</span>
+                    <span class="text-sky-400">v3.4 Active</span>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5">
+                    <span class="text-[11px] font-mono bg-slate-800/90 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700">Power BI DAX</span>
+                    <span class="text-[11px] font-mono bg-slate-800/90 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700">SQL Window Functions</span>
+                    <span class="text-[11px] font-mono bg-slate-800/90 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700">Stock Aging (RSP)</span>
+                    <span class="text-[11px] font-mono bg-slate-800/90 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700">SKU Rationalization</span>
+                    <span class="text-[11px] font-mono bg-slate-800/90 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700">Python Pandas</span>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
-          <div class="text-container">
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         METRICS / KPI STATS STRIP
+         ========================================================================= -->
+    <section id="stats-strip" class="relative -mt-6 z-20 max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 p-6 sm:p-8 rounded-2xl bg-[#090f1d]/90 backdrop-blur-xl border border-sky-500/20 shadow-2xl">
+        
+        <!-- Stat 1 -->
+        <div class="flex flex-col items-center sm:items-start text-center sm:text-left border-r border-slate-800/80 pr-4 last:border-none">
+          <div class="text-3xl sm:text-4xl font-extrabold font-heading text-sky-400 counter-val" data-target="19" data-suffix="+">
+            19+
+          </div>
+          <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1">Branches Monitored</span>
+          <span class="text-[11px] text-slate-400">Al Madina Group UAE Operations</span>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="flex flex-col items-center sm:items-start text-center sm:text-left border-r border-slate-800/80 pr-4 last:border-none">
+          <div class="text-3xl sm:text-4xl font-extrabold font-heading text-emerald-400 counter-val" data-target="3" data-suffix="+">
+            3+
+          </div>
+          <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1">Years Analytics Experience</span>
+          <span class="text-[11px] text-slate-400">Retail, FMCG & Omnichannel</span>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="flex flex-col items-center sm:items-start text-center sm:text-left border-r border-slate-800/80 pr-4 last:border-none">
+          <div class="text-3xl sm:text-4xl font-extrabold font-heading text-blue-400 counter-val" data-target="15000" data-suffix="+">
+            15,000+
+          </div>
+          <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1">SKUs Rationalized</span>
+          <span class="text-[11px] text-slate-400">Stock Aging & Purchase Audits</span>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div class="text-3xl sm:text-4xl font-extrabold font-heading text-amber-400">
+            MSc
+          </div>
+          <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1">Big Data Analytics</span>
+          <span class="text-[11px] text-slate-400">Central University of Rajasthan</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         ABOUT SECTION
+         ========================================================================= -->
+    <section id="about" class="py-24 max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- About Narrative Left -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-mono">
+            <span>ABOUT MOHAMMED SALAL</span>
+          </div>
+
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold leading-tight">
+            Bridging Commercial Strategy with <span class="text-sky-400">Hands-on Data Engineering.</span>
+          </h2>
+
+          <div class="space-y-4 text-slate-300 leading-relaxed text-base">
             <p>
-              I am Mohammed Salal K K, Strategic Data Analyst with over 3 years of experience in retail and e-commerce, specializing in sales
-              performance, stock optimization, and campaign reporting. Skilled in Power BI, SQL, Excel, Python,
-              and Google Sheets. Proven ability to deliver actionable insights, automate reporting, and collaborate with
-              stakeholders to drive revenue growth. Holds a Master of Science in Big Data Analytics
+              I am a strategic MIS & Data Analyst currently managing comprehensive reporting, inventory health, and branch performance across <span class="text-white font-medium">19 supermarket and retail branches</span> at <strong class="text-sky-300 font-semibold">Al Madina Group</strong> in Abu Dhabi, UAE.
+            </p>
+            <p>
+              My expertise centers on solving tangible business friction: controlling dead stock aging (RSP), rationalizing underperforming SKUs, setting precision branch target budgets, and auditing purchase setups before capital is committed.
+            </p>
+            <p>
+              With international experience across the <span class="text-emerald-400 font-medium">UAE, Qatar (Al Anees Electronics), and India</span>, I build end-to-end analytical pipelines—from extracting multi-million row SQL datasets to deploying executive Power BI dashboards and automated Power Query workflows.
             </p>
           </div>
+
+          <!-- 3 Analytical Pillars -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center font-bold mb-2">01</div>
+              <h4 class="font-semibold text-white text-sm mb-1">Inventory Health</h4>
+              <p class="text-xs text-slate-400">Controlling stock aging, MOQ setups, and SKU rationalization.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold mb-2">02</div>
+              <h4 class="font-semibold text-white text-sm mb-1">Target Budgeting</h4>
+              <p class="text-xs text-slate-400">Branch-level target setting, campaign ROI, and incentive structures.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold mb-2">03</div>
+              <h4 class="font-semibold text-white text-sm mb-1">ETL & Automation</h4>
+              <p class="text-xs text-slate-400">Advanced SQL CTEs, Power Query automation, and Power BI DAX modeling.</p>
+            </div>
+          </div>
         </div>
+
+        <!-- About Quick Bio Card Right -->
+        <div class="lg:col-span-5">
+          <div class="glass-panel p-6 sm:p-8 space-y-6">
+            <h3 class="font-heading text-xl font-bold text-white flex items-center justify-between">
+              <span>Quick Profile Dossier</span>
+              <span class="text-xs font-mono text-emerald-400">VERIFIED</span>
+            </h3>
+
+            <div class="space-y-4 text-sm divide-y divide-slate-800">
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Location</span>
+                <span class="text-slate-200 font-medium text-right">Dubai, United Arab Emirates</span>
+              </div>
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Visa Status</span>
+                <span class="text-emerald-400 font-medium">UAE Employment Visa</span>
+              </div>
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Phone</span>
+                <a href="tel:+971586582599" class="text-sky-400 hover:underline font-mono">+971 58 658 2599</a>
+              </div>
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Email</span>
+                <a href="mailto:kkmohdsalal@gmail.com" class="text-sky-400 hover:underline font-mono">kkmohdsalal@gmail.com</a>
+              </div>
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Post-Graduation</span>
+                <span class="text-slate-200 font-medium text-right">MSc Big Data Analytics (2024)</span>
+              </div>
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Undergraduate</span>
+                <span class="text-slate-200 font-medium text-right">BSc Computer Science (2021)</span>
+              </div>
+              <div class="pt-3 flex justify-between items-center">
+                <span class="text-slate-400">Languages</span>
+                <span class="text-slate-200 font-medium text-right">English, Hindi, Malayalam, Tamil</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button class="copy-email-btn w-full py-2.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 text-sky-300 font-semibold text-xs transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                Copy Email Address
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <!-- <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      /> -->
     </section>
-    <!-- <section id="experience"> -->
-      <!-- <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>HTML</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>CSS</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>SASS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>TypeScript</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Material UI</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
+
+    <!-- =========================================================================
+         TECHNICAL & CORE COMPETENCIES (CATEGORIZED GRID)
+         ========================================================================= -->
+    <section id="competencies" class="py-24 bg-slate-950/70 border-y border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-mono">
+            <span>TECHNICAL PROFICIENCIES</span>
+          </div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold">
+            Core Competencies & Analytical Toolkit
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Structured into 5 domain pillars from commercial retail operations to advanced statistical predictive modeling.
+          </p>
+        </div>
+
+        <!-- 5-Category Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Competency 1: Retail & Inventory Analytics -->
+          <div class="glass-panel p-6 space-y-4 border-t-2 border-t-sky-500">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              </div>
+              <span class="text-xs font-mono text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-800">DOMAIN CORE</span>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-bold text-white">Retail & Inventory Analytics</h3>
+              <p class="text-xs text-slate-400 mt-1">Multi-branch physical & omnichannel retail data optimization.</p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Sales & Margin Performance Reporting</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Stock Aging Analysis (RSP Buckets)</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> SKU Rationalization & Dead Stock Flagging</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Purchase Audits & Stock Setup Verification</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Price-Range Elasticity Analysis</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Campaign, Footfall & Incentive Tracking</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Branch-Level Target Budgeting</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">•</span> Omnichannel & E-Commerce Fulfillment</li>
+            </ul>
+          </div>
+
+          <!-- Competency 2: SQL, ETL & Data Management -->
+          <div class="glass-panel p-6 space-y-4 border-t-2 border-t-emerald-500">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+              </div>
+              <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">DATA PIPELINES</span>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-bold text-white">SQL, ETL & Data Management</h3>
+              <p class="text-xs text-slate-400 mt-1">High-volume query extraction, schema design & validation.</p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Advanced SQL (Window Functions, CTEs, Joins)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Scalable ETL Pipeline Architecture</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Data Modeling (Star & Snowflake Schemas)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Relational Database Schemas & Indexing</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Automated Cleaning & Transformation</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Strict Data Validation Rules</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">•</span> Enterprise Data Governance & Audit Compliance</li>
+            </ul>
+          </div>
+
+          <!-- Competency 3: Business Intelligence & Reporting -->
+          <div class="glass-panel p-6 space-y-4 border-t-2 border-t-blue-500">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <span class="text-xs font-mono text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800">VISUALIZATION</span>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-bold text-white">Business Intelligence & Reporting</h3>
+              <p class="text-xs text-slate-400 mt-1">Interactive dashboards for executives and branch operators.</p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Power BI (Complex DAX & Time Intelligence)</li>
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Power Query (M-Code Modeling)</li>
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Tableau Interactive Visualizations</li>
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Executive KPI Dashboards</li>
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Branch Performance Comparative Analysis</li>
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Drill-through & Dynamic Parameter Reports</li>
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span> Action-Oriented Data Storytelling</li>
+            </ul>
+          </div>
+
+          <!-- Competency 4: Advanced Excel & Automation -->
+          <div class="glass-panel p-6 space-y-4 border-t-2 border-t-amber-500">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-xs font-mono text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">AUTOMATION</span>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-bold text-white">Advanced Excel & Automation</h3>
+              <p class="text-xs text-slate-400 mt-1">High-speed modeling, formulas & cross-platform reporting.</p>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-amber-400">•</span> Advanced Formulas (XLOOKUP, INDEX/MATCH, Dynamic Arrays)</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">•</span> Power Query Ingestion & Merge Operations</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">•</span> Google Sheets (QUERY, IMPORTRANGE, Apps Script)</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">•</span> Automated Daily Branch Performance Refresh</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">•</span> Scenario Modeling & Pivot Reporting</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">•</span> Automated Discrepancy Reconciliation</li>
+            </ul>
+          </div>
+
+          <!-- Competency 5: Python & Statistical Analysis -->
+          <div class="glass-panel p-6 space-y-4 border-t-2 border-t-purple-500 md:col-span-2 lg:col-span-2">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+              <span class="text-xs font-mono text-purple-400 bg-purple-950/60 px-2 py-0.5 rounded border border-purple-800">ADVANCED ANALYTICS</span>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-bold text-white">Python & Statistical Analysis</h3>
+              <p class="text-xs text-slate-400 mt-1">Exploratory data analysis, predictive forecasting & machine learning.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Python (Pandas, NumPy, Scikit-learn)</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Exploratory Data Analysis (EDA)</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Predictive Modeling & Classification</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Time-Series Forecasting & Demand Trends</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Statistical Hypothesis Testing</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> A/B Testing & Promotion Impact Scoring</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Web Scraping & REST API Ingestion</span>
+              <span class="flex items-center gap-2"><span class="text-purple-400">•</span> Google Analytics Web & Traffic Insights</span>
             </div>
           </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>PostgreSQL</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Node JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Express JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Git</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
+
         </div>
       </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      /> -->
-    <!-- </section> -->
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/hr.png"
-                alt="Project 1"
-                class="project-img"
-                
-              />
+    </section>
+
+    <!-- =========================================================================
+         PROFESSIONAL EXPERIENCE (TIMELINE / INTERACTIVE CARD LAYOUT)
+         ========================================================================= -->
+    <section id="experience" class="py-24 max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-mono">
+          <span>CAREER TRACK RECORD</span>
+        </div>
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold">
+          Professional Experience
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Proven impact across GCC retail chains, international e-commerce operations, and data engineering environments.
+        </p>
+      </div>
+
+      <!-- Experience Cards Container -->
+      <div class="space-y-8">
+
+        <!-- Role 1: Al Madina Group -->
+        <div class="glass-panel p-6 sm:p-8 relative overflow-hidden border-l-4 border-l-sky-500">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <div class="flex flex-wrap items-center gap-2.5 mb-1">
+                <h3 class="font-heading text-xl sm:text-2xl font-bold text-white">MIS & Data Analyst</h3>
+                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
+                  CURRENT ROLE
+                </span>
+              </div>
+              <p class="text-sm font-semibold text-sky-400">Al Madina Group <span class="text-slate-400 font-normal">• Abu Dhabi, UAE (19 Branches)</span></p>
             </div>
-            <h2 class="experience-sub-title project-title">Employee Attrition HR Analysis Dashboard</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/MOHDSALAL-KK/Employee_Attrition_HR_Analysis_Dashboard'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/Employee_Attrition_HR_Analysis_Dashboard.pdf')"
-                <!-- onclick="location.href='https://github.com/MOHDSALAL-KK/Employee_Attrition_HR_Analysis_Dashboard/blob/main/Employee_Attrition_HR_Analysis_Dashboard.pdf'" -->
-              <!-- > -->
-              Project Overview
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-2.png"
-                alt="Project 2"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">E-commerce Product and Order Insights Dashboard</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/MOHDSALAL-KK/E-commerce-Product-and-Order-Insights-Dashboard-Amazon'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/E-commerce Product and Order Insights Dashboard(Amazon).pdf')"
-                <!-- onclick="location.href='https://github.com/MOHDSALAL-KK/E-commerce-Product-and-Order-Insights-Dashboard-Amazon/blob/main/E-commerce%20Product%20and%20Order%20Insights%20Dashboard(Amazon).pdf'" -->
-              <!-- > -->
-              Project Overview
-              </button>
+            <div class="text-left lg:text-right font-mono text-xs text-slate-400">
+              <span class="inline-block px-3 py-1 rounded bg-slate-800/80 border border-slate-700 text-slate-200">
+                Jun 2025 – Present
+              </span>
             </div>
           </div>
+
+          <div class="mt-5 space-y-3 text-sm text-slate-300 leading-relaxed">
+            <p class="flex items-start gap-2.5">
+              <span class="text-sky-400 mt-1 font-bold">▹</span>
+              <span>Monitor sales growth, inventory health, SKU movement, and campaign effectiveness across <strong class="text-white">19 branches</strong>, supporting operational and strategic decisions for upper management.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-sky-400 mt-1 font-bold">▹</span>
+              <span>Improve inventory efficiency and margin control through <strong class="text-white">SKU monitoring and rationalization</strong>, price-range analysis, purchase and inventory audits, and purchase stock setup.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-sky-400 mt-1 font-bold">▹</span>
+              <span>Lead branch-level target budgeting and target setting, enabling accurate performance measurement and sales planning across departments.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-sky-400 mt-1 font-bold">▹</span>
+              <span>Produce ad-hoc analyses of stock aging (RSP matching), pricing structures, campaign performance, footfall trends, employee incentives, and sales effectiveness.</span>
+            </p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-800/60 flex flex-wrap gap-2">
+            <span class="text-xs font-mono bg-sky-950/80 text-sky-300 px-2.5 py-1 rounded border border-sky-800/60">Advanced SQL</span>
+            <span class="text-xs font-mono bg-sky-950/80 text-sky-300 px-2.5 py-1 rounded border border-sky-800/60">Power BI DAX</span>
+            <span class="text-xs font-mono bg-sky-950/80 text-sky-300 px-2.5 py-1 rounded border border-sky-800/60">Stock Aging (RSP)</span>
+            <span class="text-xs font-mono bg-sky-950/80 text-sky-300 px-2.5 py-1 rounded border border-sky-800/60">SKU Rationalization</span>
+            <span class="text-xs font-mono bg-sky-950/80 text-sky-300 px-2.5 py-1 rounded border border-sky-800/60">Branch Budgeting</span>
+            <span class="text-xs font-mono bg-sky-950/80 text-sky-300 px-2.5 py-1 rounded border border-sky-800/60">Purchase Audits</span>
+          </div>
+        </div>
+
+        <!-- Role 2: Al Anees Electronics -->
+        <div class="glass-panel p-6 sm:p-8 relative overflow-hidden border-l-4 border-l-emerald-500">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <div class="flex flex-wrap items-center gap-2.5 mb-1">
+                <h3 class="font-heading text-xl sm:text-2xl font-bold text-white">Data Analyst</h3>
+                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                  OMNICHANNEL & RETAIL
+                </span>
+              </div>
+              <p class="text-sm font-semibold text-emerald-400">Al Anees Electronics Co. W.L.L <span class="text-slate-400 font-normal">• Doha, Qatar</span></p>
+            </div>
+            <div class="text-left lg:text-right font-mono text-xs text-slate-400">
+              <span class="inline-block px-3 py-1 rounded bg-slate-800/80 border border-slate-700 text-slate-200">
+                Aug 2024 – Apr 2025
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3 text-sm text-slate-300 leading-relaxed">
+            <p class="flex items-start gap-2.5">
+              <span class="text-emerald-400 mt-1 font-bold">▹</span>
+              <span>Partnered directly with the purchase team to <strong class="text-white">reduce over-purchase and under-purchase risk</strong>, enabling data-driven buying decisions and optimized stock levels for consumer electronics.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-emerald-400 mt-1 font-bold">▹</span>
+              <span>Analyzed omnichannel sales performance, e-commerce competitor activity, and call center fulfillment data to guide promotional campaign planning and hero product selection.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-emerald-400 mt-1 font-bold">▹</span>
+              <span>Controlled stock aging and ran periodic inventory reviews to maintain inventory health and sustainable sales growth across omnichannel operations.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-emerald-400 mt-1 font-bold">▹</span>
+              <span>Managed end-to-end reporting and dashboard development in Power BI, Excel, and SQL, turning complex findings into clear recommendations for business units.</span>
+            </p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-800/60 flex flex-wrap gap-2">
+            <span class="text-xs font-mono bg-emerald-950/80 text-emerald-300 px-2.5 py-1 rounded border border-emerald-800/60">Omnichannel Analytics</span>
+            <span class="text-xs font-mono bg-emerald-950/80 text-emerald-300 px-2.5 py-1 rounded border border-emerald-800/60">Power BI</span>
+            <span class="text-xs font-mono bg-emerald-950/80 text-emerald-300 px-2.5 py-1 rounded border border-emerald-800/60">Competitor Intelligence</span>
+            <span class="text-xs font-mono bg-emerald-950/80 text-emerald-300 px-2.5 py-1 rounded border border-emerald-800/60">Fulfillment Analysis</span>
+            <span class="text-xs font-mono bg-emerald-950/80 text-emerald-300 px-2.5 py-1 rounded border border-emerald-800/60">SQL Extraction</span>
+          </div>
+        </div>
+
+        <!-- Role 3: CodeRythm Technology -->
+        <div class="glass-panel p-6 sm:p-8 relative overflow-hidden border-l-4 border-l-blue-500">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <div class="flex flex-wrap items-center gap-2.5 mb-1">
+                <h3 class="font-heading text-xl sm:text-2xl font-bold text-white">Data Analyst</h3>
+                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                  ETL & DATA MODELING
+                </span>
+              </div>
+              <p class="text-sm font-semibold text-blue-400">CodeRythm Technology Pvt Ltd <span class="text-slate-400 font-normal">• Kozhikode, Kerala, India</span></p>
+            </div>
+            <div class="text-left lg:text-right font-mono text-xs text-slate-400">
+              <span class="inline-block px-3 py-1 rounded bg-slate-800/80 border border-slate-700 text-slate-200">
+                Feb 2024 – Jul 2024
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3 text-sm text-slate-300 leading-relaxed">
+            <p class="flex items-start gap-2.5">
+              <span class="text-blue-400 mt-1 font-bold">▹</span>
+              <span>Designed and maintained <strong class="text-white">scalable ETL pipelines, data models, and database schemas</strong>, supporting reliable analytics, automated reporting, and efficient data retrieval.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-blue-400 mt-1 font-bold">▹</span>
+              <span>Collected, cleaned, and transformed large datasets from databases, APIs, and web scraping using Python, advanced SQL, Power Query, and Excel, ensuring data accuracy and integrity.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-blue-400 mt-1 font-bold">▹</span>
+              <span>Applied statistical analysis, EDA, predictive modeling, and forecasting to identify trends, anomalies, and optimization opportunities.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-blue-400 mt-1 font-bold">▹</span>
+              <span>Developed interactive Power BI dashboards and automated KPI reports for cross-functional stakeholders.</span>
+            </p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-800/60 flex flex-wrap gap-2">
+            <span class="text-xs font-mono bg-blue-950/80 text-blue-300 px-2.5 py-1 rounded border border-blue-800/60">Python (Pandas)</span>
+            <span class="text-xs font-mono bg-blue-950/80 text-blue-300 px-2.5 py-1 rounded border border-blue-800/60">ETL Pipelines</span>
+            <span class="text-xs font-mono bg-blue-950/80 text-blue-300 px-2.5 py-1 rounded border border-blue-800/60">Schema Design</span>
+            <span class="text-xs font-mono bg-blue-950/80 text-blue-300 px-2.5 py-1 rounded border border-blue-800/60">Predictive Modeling</span>
+            <span class="text-xs font-mono bg-blue-950/80 text-blue-300 px-2.5 py-1 rounded border border-blue-800/60">API Integration</span>
+          </div>
+        </div>
+
+        <!-- Role 4: Homeland Traders -->
+        <div class="glass-panel p-6 sm:p-8 relative overflow-hidden border-l-4 border-l-amber-500">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div>
+              <div class="flex flex-wrap items-center gap-2.5 mb-1">
+                <h3 class="font-heading text-xl sm:text-2xl font-bold text-white">Data Analyst</h3>
+                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                  DISTRIBUTION & REPORTING
+                </span>
+              </div>
+              <p class="text-sm font-semibold text-amber-400">Homeland Traders <span class="text-slate-400 font-normal">• Malappuram, Kerala, India</span></p>
+            </div>
+            <div class="text-left lg:text-right font-mono text-xs text-slate-400">
+              <span class="inline-block px-3 py-1 rounded bg-slate-800/80 border border-slate-700 text-slate-200">
+                Mar 2021 – Nov 2022
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3 text-sm text-slate-300 leading-relaxed">
+            <p class="flex items-start gap-2.5">
+              <span class="text-amber-400 mt-1 font-bold">▹</span>
+              <span>Automated data cleansing, routine analysis, and reporting workflows, strengthening <strong class="text-white">data governance and compliance</strong> while improving accuracy and operational efficiency.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-amber-400 mt-1 font-bold">▹</span>
+              <span>Conducted ad-hoc trend and pattern analyses and contributed to predictive models for market-trend forecasting, helping the business respond quickly to changing inventory needs.</span>
+            </p>
+            <p class="flex items-start gap-2.5">
+              <span class="text-amber-400 mt-1 font-bold">▹</span>
+              <span>Built dashboards and visual reports that presented findings effectively to both technical and non-technical management audiences.</span>
+            </p>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-800/60 flex flex-wrap gap-2">
+            <span class="text-xs font-mono bg-amber-950/80 text-amber-300 px-2.5 py-1 rounded border border-amber-800/60">Data Cleansing</span>
+            <span class="text-xs font-mono bg-amber-950/80 text-amber-300 px-2.5 py-1 rounded border border-amber-800/60">Trend Analysis</span>
+            <span class="text-xs font-mono bg-amber-950/80 text-amber-300 px-2.5 py-1 rounded border border-amber-800/60">Workflow Automation</span>
+            <span class="text-xs font-mono bg-amber-950/80 text-amber-300 px-2.5 py-1 rounded border border-amber-800/60">Excel Power Query</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         FEATURED PROJECTS SECTION (INTERACTIVE FILTER TABS & CARDS)
+         ========================================================================= -->
+    <section id="projects" class="py-24 bg-slate-950/60 border-y border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-mono">
+            <span>PORTFOLIO SHOWCASE</span>
+          </div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold">
+            Featured Analytics Deployments & Dashboards
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Explore live interactive projects spanning enterprise Power BI systems, retail inventory audits, Amazon e-commerce analytics, and Google BigQuery setups.
+          </p>
+        </div>
+
+        <!-- Filter Tab Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+          <button data-filter="all" class="filter-tab active px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 text-xs font-medium transition">
+            All Projects (5)
+          </button>
+          <button data-filter="bi" class="filter-tab px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 text-xs font-medium transition">
+            Power BI & BI
+          </button>
+          <button data-filter="retail" class="filter-tab px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 text-xs font-medium transition">
+            Retail & Inventory
+          </button>
+          <button data-filter="sql" class="filter-tab px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 text-xs font-medium transition">
+            SQL & ETL
+          </button>
+          <button data-filter="spreadsheets" class="filter-tab px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 text-xs font-medium transition">
+            Spreadsheets & Cloud
+          </button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- Project Card 1: Retail Performance Dashboard -->
+          <article data-category="bi retail" class="project-card glass-panel flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div class="relative overflow-hidden aspect-video border-b border-slate-800">
+                <img src="assets/retail_bi.png" alt="Retail Performance Dashboard - Advanced Power BI Solution" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                <span class="absolute top-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-sky-950/80 text-sky-400 border border-sky-800">
+                  Power BI • DAX
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h3 class="font-heading text-lg font-bold text-white group-hover:text-sky-300 transition">
+                  Retail Performance Dashboard – Advanced Power BI Solution
+                </h3>
+                <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                  Enterprise-grade interactive dashboard delivering real-time multi-branch visibility into revenue, gross margins, SKU movement, and time-intelligence growth (MTD, YTD, YoY).
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Star Schema</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Branch Ranking</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Margin Velocity</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0 flex items-center justify-between gap-2 border-t border-slate-800/40 mt-4">
+              <button data-project="retail-bi" class="project-modal-trigger text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                <span>View Case Study</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/MOHDSALAL-KK/RETAIL-DASHBOARD" target="_blank" aria-label="GitHub Repo" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="assets/Retail Performance Dashboard - Advanced Power BI Solution.pdf" target="_blank" aria-label="PDF Document" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card 2: Private Label & Inventory Optimization -->
+          <article data-category="retail sql bi" class="project-card glass-panel flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div class="relative overflow-hidden aspect-video border-b border-slate-800">
+                <img src="assets/PrivateLabel_Advanced_Dashboard.png" alt="Private Label & Inventory Optimization Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                <span class="absolute top-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800">
+                  SQL • FMCG Suite
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h3 class="font-heading text-lg font-bold text-white group-hover:text-emerald-300 transition">
+                  Private Label & Inventory Optimization Suite
+                </h3>
+                <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                  Analytical system analyzing SKU rationalization, price-range elasticity (RSP Match), purchase stock setup verification, and stock aging across multi-branch FMCG operations.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">RSP Match</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Purchase Audits</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Dead Stock Liquidation</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0 flex items-center justify-between gap-2 border-t border-slate-800/40 mt-4">
+              <button data-project="private-label" class="project-modal-trigger text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+                <span>View Case Study</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/MOHDSALAL-KK" target="_blank" aria-label="GitHub Profile" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="assets/Mohammed_Salal_Resume.pdf" target="_blank" aria-label="Resume Overview" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card 3: E-commerce Product & Order Insights -->
+          <article data-category="bi" class="project-card glass-panel flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div class="relative overflow-hidden aspect-video border-b border-slate-800">
+                <img src="assets/project-2.png" alt="E-commerce Product and Order Insights Dashboard (Amazon)" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                <span class="absolute top-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-blue-950/80 text-blue-400 border border-blue-800">
+                  E-Commerce • Amazon
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h3 class="font-heading text-lg font-bold text-white group-hover:text-blue-300 transition">
+                  E-Commerce Product and Order Insights Dashboard
+                </h3>
+                <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                  Comprehensive visualization tool evaluating customer fulfillment cycle times, order statuses, return rates, regional demand density, and seller margins.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Fulfillment Speed</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Returns Breakdown</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Geo Heatmap</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0 flex items-center justify-between gap-2 border-t border-slate-800/40 mt-4">
+              <button data-project="ecommerce-amazon" class="project-modal-trigger text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                <span>View Case Study</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/MOHDSALAL-KK/E-commerce-Product-and-Order-Insights-Dashboard-Amazon" target="_blank" aria-label="GitHub Repo" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="assets/E-commerce Product and Order Insights Dashboard(Amazon).pdf" target="_blank" aria-label="PDF Document" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card 4: Retail Sales KPI Dashboard (Google Sheets) -->
+          <article data-category="spreadsheets retail" class="project-card glass-panel flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div class="relative overflow-hidden aspect-video border-b border-slate-800">
+                <img src="assets/retail_gsheet.png" alt="Retail Sales KPI Dashboard (Google Sheets)" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                <span class="absolute top-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800">
+                  Google Sheets • Cloud
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h3 class="font-heading text-lg font-bold text-white group-hover:text-emerald-300 transition">
+                  Retail Sales KPI Dashboard (Google Sheets)
+                </h3>
+                <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                  High-speed automated cloud dashboard delivering real-time shift performance, daily target achievement, cashier efficiency, and basket size tracking without heavy client software.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">QUERY Function</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">IMPORTRANGE</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Automated Sync</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0 flex items-center justify-between gap-2 border-t border-slate-800/40 mt-4">
+              <button data-project="retail-gsheet" class="project-modal-trigger text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+                <span>View Case Study</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <div class="flex items-center gap-2">
+                <a href="https://docs.google.com/spreadsheets/d/1iasL8M_5HJU3oCQYPTZA9xEzoM5mtYS1j_X3eGhvoMs/edit?gid=1153479738#gid=1153479738" target="_blank" aria-label="Live Google Sheet" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-emerald-400 hover:text-white transition" title="Open Live Google Sheet">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+                <a href="assets/Retail Sales KPI Dashboard.pdf" target="_blank" aria-label="PDF Document" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card 5: Employee Attrition HR Analysis Dashboard -->
+          <article data-category="bi" class="project-card glass-panel flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div class="relative overflow-hidden aspect-video border-b border-slate-800">
+                <img src="assets/hr.png" alt="Employee Attrition HR Analysis Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                <span class="absolute top-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-purple-950/80 text-purple-400 border border-purple-800">
+                  Predictive • HR Analytics
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h3 class="font-heading text-lg font-bold text-white group-hover:text-purple-300 transition">
+                  Employee Attrition HR Analysis Dashboard
+                </h3>
+                <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                  Predictive and diagnostic HR dashboard identifying leading patterns contributing to staff attrition, job role satisfaction indicators, and tenure correlations.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Turnover Risk</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Satisfaction Index</span>
+                  <span class="text-[10px] font-mono bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded">Tenure Cohorts</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0 flex items-center justify-between gap-2 border-t border-slate-800/40 mt-4">
+              <button data-project="hr-attrition" class="project-modal-trigger text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1">
+                <span>View Case Study</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/MOHDSALAL-KK/Employee_Attrition_HR_Analysis_Dashboard" target="_blank" aria-label="GitHub Repo" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="assets/Employee_Attrition_HR_Analysis_Dashboard.pdf" target="_blank" aria-label="PDF Document" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         INTERACTIVE DATA & SQL TERMINAL SIMULATOR
+         ========================================================================= -->
+    <section id="terminal" class="py-24 max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-5 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>LIVE INTERACTIVE SHELL</span>
+          </div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold">
+            Query Salal's Analytics Engine Directly
+          </h2>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Hiring managers and technical leads: run real-time commands against simulated multi-branch retail datasets, view SQL logic, or inspect branch-level operational impact.
+          </p>
           
-          </div>
-        </div>
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/retail_bi.png"
-                alt="Project 1"
-                class="project-img"
-                
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Retail Performance Dashboard – Advanced Power BI Solution</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/MOHDSALAL-KK/RETAIL-DASHBOARD'"
-              >
-                Github
+          <!-- Command Quick Chips -->
+          <div class="pt-2 space-y-2">
+            <p class="text-xs font-mono text-slate-400">Click a preset command below or type your own:</p>
+            <div class="flex flex-wrap gap-2">
+              <button data-cmd="query" class="terminal-chip text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-emerald-400 text-emerald-400 transition">
+                > query
               </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/Retail%20Performance%20Dashboard%20%E2%80%93%20Advanced%20Power%20BI%20Solution.pdf')"
-                <!-- onclick="location.href='https://github.com/MOHDSALAL-KK/RETAIL-DASHBOARD/blob/main/Retail%20Performance%20Dashboard%20%E2%80%93%20Advanced%20Power%20BI%20Solution.pdf'" -->
-              <!-- > -->
-              Project Overview
+              <button data-cmd="branches" class="terminal-chip text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-sky-400 text-sky-400 transition">
+                > branches
+              </button>
+              <button data-cmd="skills" class="terminal-chip text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-blue-400 text-blue-400 transition">
+                > skills
+              </button>
+              <button data-cmd="experience" class="terminal-chip text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-amber-400 text-amber-400 transition">
+                > experience
+              </button>
+              <button data-cmd="contact" class="terminal-chip text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-purple-400 text-purple-400 transition">
+                > contact
+              </button>
+              <button data-cmd="cv" class="terminal-chip text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-white text-slate-300 transition">
+                > cv
               </button>
             </div>
           </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/retail_gsheet.png"
-                alt="Project 2"
-                class="project-img"
-              />
+        </div>
+
+        <!-- Terminal Window Frame -->
+        <div class="lg:col-span-7">
+          <div class="terminal-window overflow-hidden border border-slate-800 shadow-2xl">
+            
+            <!-- Window Header -->
+            <div class="terminal-header">
+              <div class="flex items-center gap-2">
+                <span class="terminal-dot bg-red-500"></span>
+                <span class="terminal-dot bg-amber-500"></span>
+                <span class="terminal-dot bg-emerald-500"></span>
+                <span class="ml-2 text-xs text-slate-400 font-mono">bash — salal@dubai-analytics:~</span>
+              </div>
+              <span class="text-[10px] font-mono text-slate-500 uppercase">Interactive Session</span>
             </div>
-            <h2 class="experience-sub-title project-title">Retail Sales KPI Dashboard</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://docs.google.com/spreadsheets/d/1iasL8M_5HJU3oCQYPTZA9xEzoM5mtYS1j_X3eGhvoMs/edit?gid=1153479738#gid=1153479738'"
-              >
-                G-Sheet
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/Retail%20Sales%20KPI%20Dashboard.pdf')"
-                <!-- onclick="location.href='https://github.com/MOHDSALAL-KK/Salal-s-Portfolio/blob/main/assets/Retail%20Sales%20KPI%20Dashboard.pdf'" -->
-              <!-- > -->
-              Project Overview
-              </button>
+
+            <!-- Terminal Body Scroll Area -->
+            <div id="terminal-scroll-area" class="p-4 sm:p-6 h-80 overflow-y-auto space-y-3 font-mono text-xs">
+              <div class="text-slate-400">
+                Mohammed Salal KK Analytics Terminal [Version 2.4.0-UAE]<br/>
+                Connected to Retail Operational Warehouse (Al Madina 19 Branches Cluster).<br/>
+                Type <span class="text-sky-400 font-semibold cursor-pointer" onclick="document.getElementById('terminal-input').value='help'; document.getElementById('terminal-input').focus();">help</span> to view available operations, or click the badges on the left.
+              </div>
+              
+              <!-- Dynamic Output Container -->
+              <div id="terminal-output" class="space-y-3"></div>
+
+              <!-- Input Prompt Line -->
+              <div class="flex items-center gap-2 pt-2 text-slate-100">
+                <span class="text-emerald-400 font-semibold select-none">salal@dubai-analytics:~$</span>
+                <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command (e.g. query, branches, help)..." class="flex-1 bg-transparent border-none outline-none text-white font-mono text-xs placeholder:text-slate-600" />
+                <span class="terminal-cursor"></span>
+              </div>
             </div>
-          </div>
-          <!-- <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-3.png"
-                alt="Project 3"
-                class="project-img"
-              />
-            </div> -->
-            <!-- <h2 class="experience-sub-title project-title">Project Three</h2> -->
-            <!-- <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Live Demo
-              </button>
-            </div> -->
+
           </div>
         </div>
-      </div>
-      <!-- <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      /> -->
-    </section>
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p><a href="mailto:kkmohdsalal@gmail.com">kkmohdsalal@gmail.com</a></p>
-        </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p><a href="https://www.linkedin.com/in/mohammed-salal-kk">LinkedIn</a></p>
-        </div>
+
       </div>
     </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <!-- <li><a href="#experience">Experience</a></li> -->
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+
+    <!-- =========================================================================
+         EDUCATION & CERTIFICATIONS SECTION
+         ========================================================================= -->
+    <section id="education" class="py-24 bg-slate-950/70 border-y border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-mono">
+            <span>ACADEMIC FOUNDATION & CREDENTIALS</span>
+          </div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold">
+            Education, Certifications & Languages
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Grounded in big data analytics theory, computer science principles, and professional data analytics accreditations.
+          </p>
         </div>
-      </nav>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Left Column: Degrees -->
+          <div class="space-y-6">
+            <h3 class="font-heading text-xl font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+              <span>Academic Degrees</span>
+            </h3>
+
+            <!-- Degree 1: MSc -->
+            <div class="glass-panel p-6 space-y-3 border-l-4 border-l-sky-500">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-sky-400 bg-sky-950 px-2 py-0.5 rounded border border-sky-800">2022 – 2024</span>
+                <span class="text-xs text-slate-400 font-mono">Rajasthan, India</span>
+              </div>
+              <h4 class="font-heading text-lg font-bold text-white">
+                Master of Science (MSc) in Big Data Analytics
+              </h4>
+              <p class="text-sm font-semibold text-sky-300">Central University of Rajasthan</p>
+              <div class="pt-2 border-t border-slate-800/80">
+                <p class="text-xs text-slate-400 mb-1.5"><strong class="text-slate-300">Core Coursework:</strong></p>
+                <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-300">
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Programming for Data Science</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Statistical Theory</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Machine Learning</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Data Mining</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Econometrics</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Predictive Modeling</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Optimization Modeling</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Probability Distributions</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Degree 2: BSc -->
+            <div class="glass-panel p-6 space-y-3 border-l-4 border-l-blue-500">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">2018 – 2021</span>
+                <span class="text-xs text-slate-400 font-mono">Kerala, India</span>
+              </div>
+              <h4 class="font-heading text-lg font-bold text-white">
+                Bachelor of Science (BSc) in Computer Science
+              </h4>
+              <p class="text-sm font-semibold text-blue-300">University of Calicut</p>
+              <div class="pt-2 border-t border-slate-800/80">
+                <p class="text-xs text-slate-400 mb-1.5"><strong class="text-slate-300">Core Coursework:</strong></p>
+                <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-300">
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Data Structures</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Software Engineering</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Databases</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Statistics</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Python</span>
+                  <span class="bg-slate-800/80 px-2 py-0.5 rounded">Java</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Certifications & Languages -->
+          <div class="space-y-6">
+            <h3 class="font-heading text-xl font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+              <span>Certifications & Accreditations</span>
+            </h3>
+
+            <!-- Certification 1: Google Data Analytics -->
+            <div class="glass-panel p-5 space-y-2 border-l-4 border-l-emerald-500">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">Google / Coursera</span>
+                <span class="text-xs text-slate-400">Professional Credential</span>
+              </div>
+              <h4 class="font-heading font-bold text-white text-base">Google Data Analytics Professional Certificate</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Key Skills: BigQuery data warehousing, R & RStudio, advanced spreadsheet analysis, data cleaning methodologies, and executive data presentation.
+              </p>
+            </div>
+
+            <!-- Certification 2: YBI Foundation -->
+            <div class="glass-panel p-5 space-y-2 border-l-4 border-l-purple-500">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-purple-400 bg-purple-950 px-2 py-0.5 rounded border border-purple-800">YBI Foundation</span>
+                <span class="text-xs text-slate-400">Industry Internship</span>
+              </div>
+              <h4 class="font-heading font-bold text-white text-base">Machine Learning Internship</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Key Skills: Regression analysis, classification algorithms, feature engineering, data preprocessing pipelines, and model evaluation metrics.
+              </p>
+            </div>
+
+            <!-- Languages Card -->
+            <div class="glass-panel p-5 space-y-3">
+              <h4 class="font-heading font-bold text-white text-base flex items-center justify-between">
+                <span>Spoken Languages</span>
+                <span class="text-xs font-mono text-sky-400">4 Languages</span>
+              </h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-center font-mono">
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-xs font-bold text-white block">English</span>
+                  <span class="text-[10px] text-emerald-400">Professional</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-xs font-bold text-white block">Hindi</span>
+                  <span class="text-[10px] text-sky-400">Fluent</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-xs font-bold text-white block">Malayalam</span>
+                  <span class="text-[10px] text-emerald-400">Native</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-xs font-bold text-white block">Tamil</span>
+                  <span class="text-[10px] text-slate-400">Conversational</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CONTACT & INQUIRY SECTION (DUBAI UAE)
+         ========================================================================= -->
+    <section id="contact" class="py-24 max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Contact Left Column -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-mono">
+            <span>GET IN TOUCH</span>
+          </div>
+
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold leading-tight">
+            Let's Discuss Analytics, Inventory Optimization & Growth.
+          </h2>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            I am based in <strong class="text-white">Dubai, United Arab Emirates</strong> holding a valid <span class="text-emerald-400 font-medium">Employment Visa</span>. Ready to connect regarding MIS leadership, senior data analysis, inventory consulting, or business intelligence roles.
+          </p>
+
+          <!-- Contact Cards -->
+          <div class="space-y-3 pt-2">
+            
+            <!-- Phone -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+                <div>
+                  <p class="text-[11px] font-mono text-slate-400">Direct Phone / WhatsApp</p>
+                  <a href="tel:+971586582599" class="text-sm font-semibold text-white hover:text-emerald-400 transition font-mono">+971 58 658 2599</a>
+                </div>
+              </div>
+              <button class="copy-phone-btn px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 hover:text-white transition" title="Copy Phone Number">
+                Copy
+              </button>
+            </div>
+
+            <!-- Email -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <p class="text-[11px] font-mono text-slate-400">Primary Email</p>
+                  <a href="mailto:kkmohdsalal@gmail.com" class="text-sm font-semibold text-white hover:text-sky-400 transition font-mono">kkmohdsalal@gmail.com</a>
+                </div>
+              </div>
+              <button class="copy-email-btn px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 hover:text-white transition" title="Copy Email">
+                Copy
+              </button>
+            </div>
+
+            <!-- WhatsApp Direct -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-emerald-600/10 text-emerald-400 flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </div>
+                <div>
+                  <p class="text-[11px] font-mono text-slate-400">Fast Messaging</p>
+                  <span class="text-sm font-semibold text-white font-mono">WhatsApp Connect</span>
+                </div>
+              </div>
+              <a href="https://wa.me/971586582599?text=Hi%20Mohammed%20Salal,%20I%20reviewed%20your%20analytics%20portfolio" target="_blank" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold text-white transition flex items-center gap-1">
+                Chat Now
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Contact Form Right Column -->
+        <div class="lg:col-span-7">
+          <div class="glass-panel p-6 sm:p-8">
+            <h3 class="font-heading text-xl font-bold text-white mb-2">Send an Inquiry or Job Lead</h3>
+            <p class="text-xs text-slate-400 mb-6">Fill in the fields below to initiate direct email contact with Mohammed Salal KK.</p>
+
+            <form id="contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="form-name" class="block text-xs font-mono text-slate-400 mb-1.5">YOUR NAME *</label>
+                  <input type="text" id="form-name" required placeholder="e.g. Sarah Jenkins" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder:text-slate-600 text-sm focus:border-sky-500 outline-none transition" />
+                </div>
+                <div>
+                  <label for="form-email" class="block text-xs font-mono text-slate-400 mb-1.5">EMAIL ADDRESS *</label>
+                  <input type="email" id="form-email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder:text-slate-600 text-sm focus:border-sky-500 outline-none transition" />
+                </div>
+              </div>
+
+              <div>
+                <label for="form-subject" class="block text-xs font-mono text-slate-400 mb-1.5">SUBJECT / OPPORTUNITY</label>
+                <input type="text" id="form-subject" placeholder="e.g. Senior MIS / BI Analyst Role in UAE" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder:text-slate-600 text-sm focus:border-sky-500 outline-none transition" />
+              </div>
+
+              <div>
+                <label for="form-message" class="block text-xs font-mono text-slate-400 mb-1.5">MESSAGE DETAILS *</label>
+                <textarea id="form-message" rows="4" required placeholder="Describe your project, branch analytics scope, or recruitment requirements..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder:text-slate-600 text-sm focus:border-sky-500 outline-none transition resize-none"></textarea>
+              </div>
+
+              <div class="pt-2 flex items-center justify-between">
+                <button type="submit" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-sm transition shadow-lg shadow-sky-500/20 flex items-center gap-2">
+                  <span>Send Message Directly</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+                <span class="text-[11px] font-mono text-slate-500 hidden sm:inline">Typical response within 2 hours</span>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       FOOTER SECTION
+       ========================================================================= -->
+  <footer class="border-t border-slate-900 bg-[#04060d] py-12 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 flex items-center justify-center font-heading font-black text-sky-400 text-sm">
+          S
+        </div>
+        <div>
+          <p class="font-heading font-bold text-white text-sm">Mohammed Salal KK</p>
+          <p class="text-[11px] font-mono text-slate-400">MIS & Data Analyst • Dubai, UAE</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+        <a href="#about" class="hover:text-sky-400 transition">About</a>
+        <a href="#competencies" class="hover:text-sky-400 transition">Competencies</a>
+        <a href="#experience" class="hover:text-sky-400 transition">Experience</a>
+        <a href="#projects" class="hover:text-sky-400 transition">Projects</a>
+        <a href="#terminal" class="hover:text-sky-400 transition">Terminal</a>
+        <a href="#education" class="hover:text-sky-400 transition">Education</a>
+        <a href="#contact" class="hover:text-sky-400 transition">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3 text-slate-400">
+        <a href="https://github.com/MOHDSALAL-KK" target="_blank" aria-label="GitHub" class="hover:text-white transition">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/mohammed-salal-kk" target="_blank" aria-label="LinkedIn" class="hover:text-white transition">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="#hero" aria-label="Back to top" class="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-sky-500 hover:text-white transition ml-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       PROJECT DETAILS MODAL DIALOG
+       ========================================================================= -->
+  <div id="project-modal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div class="modal-content-box relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#090f1d] border border-sky-500/30 rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6">
+      
+      <!-- Modal Close Button -->
+      <button id="modal-close-btn" aria-label="Close modal" class="absolute top-4 right-4 p-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-400 hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="space-y-2 pr-8">
+        <h3 id="modal-title" class="font-heading text-2xl font-bold text-white">Project Title</h3>
+        <p id="modal-subtitle" class="text-xs font-mono text-sky-400">Subtitle & Domain</p>
+        <div id="modal-tags" class="flex flex-wrap gap-1.5 pt-1"></div>
+      </div>
+
+      <!-- Modal Image -->
+      <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+        <img id="modal-image" src="" alt="Project Preview" class="w-full max-h-72 object-cover object-center" />
+      </div>
+
+      <!-- Problem & Solution Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+          <h4 class="text-xs font-mono text-red-400 uppercase font-bold mb-1">Operational Problem</h4>
+          <p id="modal-problem" class="text-xs text-slate-300 leading-relaxed"></p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+          <h4 class="text-xs font-mono text-emerald-400 uppercase font-bold mb-1">Analytical Solution</h4>
+          <p id="modal-solution" class="text-xs text-slate-300 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <div>
+        <h4 class="text-xs font-mono text-slate-400 uppercase font-bold mb-1">Project Overview</h4>
+        <p id="modal-overview" class="text-sm text-slate-300 leading-relaxed"></p>
+      </div>
+
+      <!-- Key Impact Points -->
+      <div>
+        <h4 class="text-xs font-mono text-slate-400 uppercase font-bold mb-2">Quantifiable Impact & Deliverables</h4>
+        <ul id="modal-impact" class="space-y-1.5"></ul>
+      </div>
+
+      <!-- Modal Actions Links -->
+      <div id="modal-links" class="pt-4 border-t border-slate-800 flex flex-wrap gap-3"></div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FLOATING TOAST NOTIFICATION
+       ========================================================================= -->
+  <div id="toast" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-900 border border-sky-500/40 text-sky-300 text-xs font-mono shadow-2xl">
+    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span id="toast-message">Notification message</span>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="assets/js/main.js"></script>
+</body>
 </html>
