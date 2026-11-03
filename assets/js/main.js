@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initCompetencyFilters();
   initExperienceAccordion();
-  initTerminal();
   initProjects();
   initModal();
   initClipboardAndToasts();
@@ -155,6 +154,7 @@ function initCounters() {
         animated = true;
         counters.forEach(counter => {
           const target = parseFloat(counter.getAttribute('data-target'));
+          const prefix = counter.getAttribute('data-prefix') || '';
           const suffix = counter.getAttribute('data-suffix') || '';
           const duration = 1600;
           const startTime = performance.now();
@@ -165,12 +165,12 @@ function initCounters() {
             const easeOut = 1 - Math.pow(1 - progress, 3);
             const currentVal = Math.floor(easeOut * target);
 
-            counter.textContent = currentVal + suffix;
+            counter.textContent = prefix + currentVal + suffix;
 
             if (progress < 1) {
               requestAnimationFrame(updateCounter);
             } else {
-              counter.textContent = target + suffix;
+              counter.textContent = prefix + target + suffix;
             }
           }
 
@@ -299,22 +299,22 @@ function initTerminal() {
 
     skills: () => `
 <div class="text-slate-300 space-y-2">
-  <p class="text-sky-400 font-bold">Mohammed Salal KK | Core Competencies:</p>
-  <p><span class="text-sky-300 font-semibold">• Retail & Inventory:</span> Stock Aging (RSP), SKU Rationalization, Margin Control, Purchase Audits</p>
-  <p><span class="text-emerald-300 font-semibold">• SQL & ETL:</span> Advanced SQL (Window Functions, CTEs, Joins), Data Modeling, Data Cleaning</p>
-  <p><span class="text-amber-300 font-semibold">• BI & Reporting:</span> Power BI (DAX, Star Schema), Tableau, Executive KPI Dashboards</p>
-  <p><span class="text-blue-300 font-semibold">• Spreadsheets:</span> Advanced Excel, Power Query, Google Sheets (QUERY/IMPORTRANGE)</p>
-  <p><span class="text-purple-300 font-semibold">• Python & ML:</span> Pandas, NumPy, Scikit-learn, EDA, Predictive Modeling, Forecasting</p>
+  <p class="text-sky-400 font-bold">Mohammed Salal KK | Core Competencies & Technical Mastery:</p>
+  <p><span class="text-sky-300 font-semibold">• Retail & Inventory Intelligence:</span> Omnichannel sales tracking, stock aging audits, SKU rationalization, margin control, promotional campaign evaluation, and branch target budgeting.</p>
+  <p><span class="text-emerald-300 font-semibold">• Data Engineering & Architecture:</span> Advanced SQL querying, ETL pipeline design, database schema modeling, data hygiene, and validation governance.</p>
+  <p><span class="text-blue-300 font-semibold">• Business Intelligence & Storytelling:</span> Power BI dashboard development, executive KPI reporting, and visual data communication.</p>
+  <p><span class="text-amber-300 font-semibold">• Workflow Automation & Spreadsheets:</span> Automated data modeling, Power Query optimization, and advanced Google Sheets workflows.</p>
+  <p><span class="text-purple-300 font-semibold">• Statistical & Predictive Analysis:</span> Python (Pandas, NumPy, Scikit-learn), exploratory data analysis (EDA), trend forecasting, and performance benchmarking.</p>
 </div>`,
 
     branches: () => `
 <div class="text-slate-300 space-y-2">
   <div class="flex items-center gap-2 text-emerald-400 font-bold">
     <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-    Al Madina Group - 19 Branches Operational Analytics (UAE):
+    Al Madina Group - 19 Regional Branches Analytics (Abu Dhabi & UAE):
   </div>
   <p class="text-slate-300">
-    <span class="text-sky-400 font-semibold">Scope:</span> Managing end-to-end MIS and operational analytics across 19 major retail hypermarkets and supermarkets in Abu Dhabi and across UAE.
+    <span class="text-sky-400 font-semibold">Scope:</span> Directing branch performance, inventory health, campaign ROI, and target budgeting models across 19 regional hypermarket and supermarket operations.
   </p>
   <div class="grid grid-cols-2 sm:grid-cols-3 gap-1 text-xs text-slate-400 font-mono bg-slate-900/60 p-2 rounded border border-slate-800">
     <span>• Khalidiya Branch</span>
@@ -327,12 +327,12 @@ function initTerminal() {
     <span>• Najda Market</span>
     <span>• + 11 Regional Units</span>
   </div>
-  <p class="text-xs text-sky-300">Monitored: Daily sales, SKU movement, stock aging (RSP), campaign ROI, and monthly target budgeting.</p>
+  <p class="text-xs text-sky-300">Operational Deliverables: SKU rationalization, price-range audits, stock aging audits, and sales forecasting.</p>
 </div>`,
 
     query: () => `
 <div class="text-xs font-mono space-y-2">
-  <p class="text-slate-400">Executing SQL Statement on Retail Cluster...</p>
+  <p class="text-slate-400">Executing SQL Statement on Retail Operations Cluster...</p>
   <div class="p-2 bg-slate-950/80 rounded border border-slate-800 text-sky-300">
     <span class="text-purple-400">SELECT</span> branch_name, <span class="text-blue-400">COUNT</span>(DISTINCT sku_code) <span class="text-purple-400">AS</span> active_skus,<br/>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">ROUND</span>(<span class="text-blue-400">AVG</span>(margin_pct), <span class="text-amber-400">2</span>) <span class="text-purple-400">AS</span> avg_margin_pct,<br/>
@@ -378,15 +378,15 @@ function initTerminal() {
 
     experience: () => `
 <div class="text-slate-300 space-y-2">
-  <p class="text-sky-400 font-bold">Mohammed Salal KK | Career Track Record:</p>
+  <p class="text-sky-400 font-bold">Mohammed Salal KK | Refined Professional Track Record:</p>
   <p><span class="text-emerald-400 font-semibold">1. Al Madina Group (Abu Dhabi, UAE)</span> | Jun 2025 – Present<br/>
-     <span class="text-xs text-slate-400">MIS & Data Analyst - 19 Branches, SKU rationalization, target budgeting, stock aging.</span></p>
-  <p><span class="text-sky-400 font-semibold">2. Al Anees Electronics (Doha, Qatar)</span> | Aug 2024 – Apr 2025<br/>
-     <span class="text-xs text-slate-400">Data Analyst - Omnichannel electronics retail, purchase team optimization, competitor analytics.</span></p>
-  <p><span class="text-amber-400 font-semibold">3. CodeRythm Technology (Kerala, India)</span> | Feb 2024 – Jul 2024<br/>
-     <span class="text-xs text-slate-400">Data Analyst - Scalable ETL pipelines, data modeling, predictive modeling & Power BI dashboards.</span></p>
-  <p><span class="text-purple-400 font-semibold">4. Homeland Traders (Kerala, India)</span> | Mar 2021 – Nov 2022<br/>
-     <span class="text-xs text-slate-400">Data Analyst - Cleansing automation, trend & pattern forecasting, visual reporting.</span></p>
+     <span class="text-xs text-slate-400">MIS & Data Analyst: Direct branch performance across 19 regional locations, spearhead SKU rationalization, architect target budgeting models, and stock aging audits.</span></p>
+  <p><span class="text-sky-400 font-semibold">2. Al Anees Electronics Co. W.L.L (Doha, Qatar)</span> | Aug 2024 – Apr 2025<br/>
+     <span class="text-xs text-slate-400">Data Analyst: Partnered with procurement to mitigate stock imbalances, evaluated omnichannel sales trends, and built Power BI executive suites.</span></p>
+  <p><span class="text-amber-400 font-semibold">3. CodeRythm Technology Pvt Ltd (Kozhikode, India)</span> | Feb 2024 – Jul 2024<br/>
+     <span class="text-xs text-slate-400">Data Analyst: Designed scalable ETL pipelines, cleaned API/database data with Python & SQL, applied statistical EDA, and built KPI suites.</span></p>
+  <p><span class="text-purple-400 font-semibold">4. Homeland Traders (Malappuram, India)</span> | Mar 2021 – Nov 2022<br/>
+     <span class="text-xs text-slate-400">Data Analyst: Automated reporting pipelines, executed predictive trend analyses, and strengthened data governance compliance.</span></p>
 </div>`,
 
     contact: () => `
@@ -529,22 +529,6 @@ const projectData = {
     ],
     github: 'https://github.com/MOHDSALAL-KK/RETAIL-DASHBOARD',
     pdf: 'assets/Retail Performance Dashboard - Advanced Power BI Solution.pdf'
-  },
-  'private-label': {
-    title: 'Private Label & Inventory Optimization Suite',
-    subtitle: 'SKU Rationalization, Stock Aging & Margin Control',
-    image: 'assets/PrivateLabel_Advanced_Dashboard.png',
-    tags: ['SQL', 'Power BI', 'SKU Rationalization', 'RSP Match', 'Inventory Audits'],
-    overview: 'Comprehensive analytical system constructed to analyze private label penetration, evaluate price-range elasticity (RSP match), audit purchase stock setups, and eliminate slow-moving or dead stock.',
-    problem: 'Excessive capital was tied up in slow-moving non-core SKUs, while high-margin private label products faced inconsistent stock availability and uncoordinated purchase order triggers.',
-    solution: 'Authored complex SQL queries and Python automated workflows to categorize inventory by aging tiers (0-30d, 31-90d, 90-180d, >180d). Built automated purchase setup verification audits to flag MOQ discrepancies before PO sign-off.',
-    impact: [
-      'Audited purchase setups across 15,000+ active SKUs, significantly reducing over-purchase risk.',
-      'Streamlined branch target setting and margin control for private label FMCG goods.',
-      'Identified critical dead stock for promotional liquidation, freeing working capital.'
-    ],
-    github: 'https://github.com/MOHDSALAL-KK',
-    pdf: 'assets/Mohammed_Salal_Resume.pdf'
   },
   'ecommerce-amazon': {
     title: 'E-Commerce Product and Order Insights Dashboard (Amazon)',
