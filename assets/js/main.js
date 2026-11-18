@@ -190,7 +190,7 @@
   }, 1600);
 
   /* =====================================================================
-     3D Hero — holographic analytics scene
+     3D Hero — Dubai skyline holograms + analytics scene
      A living terrain of data bars that ripples under the cursor, floating
      glass dashboard panels with live charts, and rising data particles.
      ===================================================================== */
@@ -327,15 +327,156 @@
     });
 
     const panels = [
-      { p: linePanel, base: new T.Vector3(offX + 6, 13, -6), bob: 0 },
-      { p: barPanel, base: new T.Vector3(offX + 10, 6, 0), bob: 1.7 },
-      { p: donutPanel, base: new T.Vector3(offX - 6, 9, -16), bob: 3.1 },
+      { p: linePanel, base: new T.Vector3(offX + 7, 8, 3), bob: 0 },
+      { p: barPanel, base: new T.Vector3(offX - 4, 1.2, 11), bob: 1.7 },
+      { p: donutPanel, base: new T.Vector3(offX - 5, 5, 3), bob: 3.1 },
     ];
     if (isSmall) {
       panels[0].base.set(0, 15, -8);
       panels[1].base.set(9, 9, -16);
       panels[2].base.set(-9, 9, -16);
     }
+
+    /* ---------- Dubai skyline as data holograms ---------- */
+    // Wireframe landmarks rising behind the data terrain. Fog is disabled on
+    // these materials so they glow through the haze like projected holograms.
+    const holo = new T.Group();
+    holo.scale.setScalar(isSmall ? 0.75 : 0.62);
+    scene.add(holo);
+    const goldLine = new T.LineBasicMaterial({ color: 0xf6d98f, transparent: true, opacity: 0.85, fog: false });
+    const tealLine = new T.LineBasicMaterial({ color: 0x2dd4bf, transparent: true, opacity: 0.75, fog: false });
+    const glassMat = new T.MeshBasicMaterial({ color: 0x0f2338, transparent: true, opacity: 0.35, fog: false, depthWrite: false });
+    const addHolo = (geo, lineMat, parent, threshold = 1) => {
+      const g = new T.Group();
+      g.add(new T.Mesh(geo, glassMat));
+      g.add(new T.LineSegments(new T.EdgesGeometry(geo, threshold), lineMat));
+      parent.add(g);
+      return g;
+    };
+    const L = isSmall ? { tower: [2, -70], sail: [24, -66], museum: [-20, -66], frame: [-40, -80] }
+                      : { tower: [offX + 14, -88], sail: [offX + 44, -80], museum: [offX - 12, -84], frame: [offX + 70, -96] };
+
+    // 1) Supertall tower — tiered hexagonal setbacks + spire, with a scanning data ring
+    const tower = new T.Group();
+    tower.position.set(L.tower[0], 0, L.tower[1]);
+    holo.add(tower);
+    const tiers = [[3.2, 6], [2.7, 5.5], [2.2, 5], [1.75, 4.5], [1.35, 4], [1.0, 3.5], [0.68, 3], [0.4, 2.5]];
+    let ty = 0;
+    const tierAt = [];
+    tiers.forEach(([r, h]) => {
+      const geo = new T.CylinderGeometry(r * 0.8, r, h, 6, 3);
+      geo.translate(0, ty + h / 2, 0);
+      addHolo(geo, goldLine, tower);
+      tierAt.push({ y0: ty, y1: ty + h, r0: r, r1: r * 0.8 });
+      ty += h;
+    });
+    const spireGeo = new T.CylinderGeometry(0.05, 0.22, 9, 6);
+    spireGeo.translate(0, ty + 4.5, 0);
+    tower.add(new T.Mesh(spireGeo, new T.MeshBasicMaterial({ color: 0xf6d98f, fog: false })));
+    const towerTop = ty + 9;
+    const beacon = new T.Mesh(new T.SphereGeometry(0.35, 12, 12), new T.MeshBasicMaterial({ color: 0xffffff, fog: false }));
+    beacon.position.y = towerTop;
+    tower.add(beacon);
+    const radiusAt = (y) => {
+      const t = tierAt.find((k) => y >= k.y0 && y <= k.y1) || tierAt[tierAt.length - 1];
+      return t.r0 + (t.r1 - t.r0) * ((y - t.y0) / (t.y1 - t.y0));
+    };
+    const scanRing = new T.Mesh(new T.RingGeometry(1, 1.12, 48), new T.MeshBasicMaterial({ color: 0x2dd4bf, transparent: true, opacity: 0.9, side: T.DoubleSide, fog: false }));
+    scanRing.rotation.x = -Math.PI / 2;
+    tower.add(scanRing);
+    // orbiting HUD ring of data ticks around the tower crown
+    const hud = new T.Group();
+    hud.position.y = ty - 6;
+    tower.add(hud);
+    const tickGeo = new T.BufferGeometry();
+    const tickPts = [];
+    for (let i = 0; i < 72; i++) {
+      const a = (i / 72) * Math.PI * 2, r1 = 6, r2 = i % 6 === 0 ? 7.2 : 6.5;
+      tickPts.push(Math.cos(a) * r1, 0, Math.sin(a) * r1, Math.cos(a) * r2, 0, Math.sin(a) * r2);
+    }
+    tickGeo.setAttribute("position", new T.Float32BufferAttribute(tickPts, 3));
+    hud.add(new T.LineSegments(tickGeo, tealLine));
+    const arc = new T.Mesh(new T.TorusGeometry(6, 0.05, 6, 64, Math.PI * 1.2), new T.MeshBasicMaterial({ color: 0xf6d98f, fog: false }));
+    arc.rotation.x = Math.PI / 2;
+    hud.add(arc);
+
+    // 2) Sail-shaped hotel — curved sail profile extruded, with a mast
+    const sail = new T.Group();
+    sail.position.set(L.sail[0], 0, L.sail[1]);
+    sail.rotation.y = -0.5;
+    holo.add(sail);
+    const sailShape = new T.Shape();
+    sailShape.moveTo(0, 0);
+    sailShape.lineTo(5.5, 0);
+    sailShape.quadraticCurveTo(5.8, 10, 0.6, 21);
+    sailShape.lineTo(0, 21);
+    sailShape.lineTo(0, 0);
+    const sailGeo = new T.ExtrudeGeometry(sailShape, { depth: 3.2, bevelEnabled: false, curveSegments: 10 });
+    sailGeo.translate(-1, 0, -1.6);
+    addHolo(sailGeo, tealLine, sail, 20);
+    const mastGeo = new T.CylinderGeometry(0.08, 0.12, 25, 6);
+    mastGeo.translate(-1.1, 12.5, 0);
+    sail.add(new T.Mesh(mastGeo, new T.MeshBasicMaterial({ color: 0x2dd4bf, fog: false })));
+    const helipad = new T.Mesh(new T.CylinderGeometry(1.6, 1.6, 0.2, 24), glassMat);
+    helipad.position.set(4.6, 13, 0);
+    sail.add(helipad);
+    sail.add(new T.LineSegments(new T.EdgesGeometry(new T.CylinderGeometry(1.6, 1.6, 0.2, 24)), tealLine).translateX(4.6).translateY(13));
+
+    // 3) Torus-shaped museum — standing elliptical ring on a mound
+    const museum = new T.Group();
+    museum.position.set(L.museum[0], 0, L.museum[1]);
+    museum.rotation.y = 0.6;
+    holo.add(museum);
+    const torusGeo = new T.TorusGeometry(5, 1.9, 10, 36);
+    torusGeo.scale(1, 1.25, 1);
+    torusGeo.translate(0, 8.5, 0);
+    addHolo(torusGeo, goldLine, museum, 25);
+    const moundGeo = new T.CylinderGeometry(4, 6, 2.2, 24);
+    moundGeo.translate(0, 1.1, 0);
+    addHolo(moundGeo, tealLine, museum, 30);
+
+    // 4) Frame tower — two pillars and a bridge, framing the skyline
+    const frameT = new T.Group();
+    frameT.position.set(L.frame[0], 0, L.frame[1]);
+    frameT.rotation.y = -0.3;
+    holo.add(frameT);
+    [[-4.5, 0], [4.5, 0]].forEach(([x]) => {
+      const g = new T.BoxGeometry(2, 22, 2);
+      g.translate(x, 11, 0);
+      addHolo(g, goldLine, frameT);
+    });
+    const bridge = new T.BoxGeometry(11, 2, 2);
+    bridge.translate(0, 23, 0);
+    addHolo(bridge, goldLine, frameT);
+
+    // Holographic location tag above the skyline
+    const tag = makePanel(8, 2.2, (ctx, W, H) => {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "rgba(8,14,28,0.7)";
+      ctx.strokeStyle = "rgba(45,212,191,0.8)";
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.rect(3, 3, W - 6, H - 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#f6d98f";
+      ctx.font = "700 46px 'Space Grotesk', Inter, sans-serif";
+      ctx.fillText("DUBAI", 26, 82);
+      ctx.fillStyle = "#2dd4bf";
+      ctx.font = "500 24px 'JetBrains Mono', monospace";
+      ctx.fillText("25.20°N  55.27°E", 210, 66);
+      ctx.fillStyle = "#8e99ad";
+      ctx.fillText("ANALYTICS · LIVE", 210, 98);
+      ctx.font = "600 44px 'Reem Kufi', sans-serif";
+      ctx.fillStyle = "#e2b659";
+      ctx.textAlign = "right";
+      ctx.fillText("دبي", W - 22, 86);
+      ctx.textAlign = "left";
+    });
+    // connector from tag to the tower top
+    const tagLineGeo = new T.BufferGeometry();
+    tagLineGeo.setAttribute("position", new T.Float32BufferAttribute([0, 0, 0, 0, 0, 0], 3));
+    const tagLine = new T.Line(tagLineGeo, new T.LineDashedMaterial({ color: 0x2dd4bf, dashSize: 0.6, gapSize: 0.4, transparent: true, opacity: 0.7, fog: false }));
+    scene.add(tagLine);
+    const holoParts = [tower, sail, museum, frameT];
+    holoParts.forEach((p) => (p.scale.y = 0.001));
 
     /* ---------- Rising data particles ---------- */
     const PN = isSmall ? 350 : 800;
@@ -448,6 +589,7 @@
 
       // panels float, gently face the camera, fade in after the terrain
       panels.forEach(({ p, base, bob }) => {
+        p.mesh.scale.setScalar(isSmall ? 1 : 0.78);
         p.mesh.position.set(base.x, base.y + Math.sin(t * 0.8 + bob) * 0.6, base.z);
         p.mesh.lookAt(camera.position);
         p.mesh.rotateY(Math.sin(t * 0.4 + bob) * 0.12);
@@ -461,6 +603,33 @@
         mix = mix.map((v) => Math.max(8, v + (Math.random() - 0.5) * 3));
         linePanel.redraw(t); barPanel.redraw(t); donutPanel.redraw(t);
       }
+
+      // Dubai holograms: rise in, scan ring sweeps the tower, HUD ring orbits
+      holoParts.forEach((p, i) => (p.scale.y = Math.max(0.001, easeOut((t - 1.0 - i * 0.25) / 1.8))));
+      const scanY = ((t * 4) % (ty + 2));
+      scanRing.position.y = scanY;
+      const sr = radiusAt(Math.min(scanY, ty - 0.01)) + 0.5;
+      scanRing.scale.set(sr, sr, 1);
+      scanRing.material.opacity = 0.9 * (1 - scanY / (ty + 2));
+      hud.rotation.y = t * 0.35;
+      hud.position.y = ty - 6 + Math.sin(t * 0.9) * 0.6;
+      beacon.material.color.setHSL(0.12, 1, 0.65 + Math.sin(t * 4) * 0.25);
+      const flicker = 0.7 + Math.sin(t * 2.3) * 0.08 + (Math.random() < 0.01 ? -0.3 : 0);
+      goldLine.opacity = 0.85 * flicker;
+      tealLine.opacity = 0.75 * flicker;
+      // location tag floats above the tower and faces the camera
+      const topW = new T.Vector3(0, towerTop * tower.scale.y, 0);
+      tower.localToWorld(topW);
+      const tagPos = new T.Vector3(topW.x - 9, topW.y - 8 + Math.sin(t * 0.7) * 0.5, topW.z + 6);
+      tag.mesh.position.copy(tagPos);
+      tag.mesh.lookAt(camera.position);
+      tag.mesh.material.opacity = easeOut((t - 2.6) / 1) * (isSmall ? 0.6 : 0.95);
+      const tp = tagLine.geometry.attributes.position;
+      tp.setXYZ(0, tagPos.x + 4, tagPos.y + 1.1, tagPos.z);
+      tp.setXYZ(1, topW.x, topW.y, topW.z);
+      tp.needsUpdate = true;
+      tagLine.computeLineDistances();
+      tagLine.material.opacity = tag.mesh.material.opacity * 0.7;
 
       // particles drift upward and recycle
       if (!reduceMotion) {
