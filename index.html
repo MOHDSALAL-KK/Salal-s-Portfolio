@@ -53,12 +53,12 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#studio">Toolkit</a>
-      <a href="#pulse">News</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
+      <a href="#pulse">News</a>
     </nav>
     <div class="nav-cta">
       <a href="assets/Mohammed_Salal_Resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Résumé</a>
@@ -70,12 +70,12 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#about"><span>01</span>About</a>
     <a href="#studio"><span>02</span>Toolkit</a>
-    <a href="#pulse"><span>✦</span>Live news</a>
     <a href="#skills"><span>03</span>Skills</a>
     <a href="#experience"><span>04</span>Experience</a>
     <a href="#projects"><span>05</span>Projects</a>
     <a href="#education"><span>06</span>Education</a>
     <a href="#contact"><span>07</span>Contact</a>
+    <a href="#pulse"><span>✦</span>Live news</a>
   </div>
 
   <main id="top">
@@ -149,39 +149,6 @@
           <div class="stat"><div class="stat-num"><span data-count="19">0</span></div><div class="stat-label">Retail branches</div><div class="stat-sub">Daily MIS reporting in the UAE</div></div>
           <div class="stat"><div class="stat-num"><span data-count="25" >0</span><em>K+</em></div><div class="stat-label">Active SKUs tracked</div><div class="stat-sub">Stock aging &amp; rationalization</div></div>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= ANALYTICS PULSE (LIVE NEWS) ================= -->
-    <section class="section pulse" id="pulse" style="padding-block: 90px 20px;">
-      <div class="container">
-        <div class="pulse-head">
-          <div class="section-head">
-            <span class="eyebrow reveal">Analytics pulse · live</span>
-            <h2 class="split reveal" data-delay="1">What's new in <span class="grad">data analytics.</span></h2>
-            <p class="reveal" data-delay="2">Live headlines and articles from the Power BI blog, KDnuggets, Towards Data Science, DEV Community and Hacker News. Updates automatically.</p>
-          </div>
-          <div class="pulse-status reveal">
-            <span class="live">LIVE</span>
-            <span class="pulse-meta" id="pulseMeta">Connecting to live feeds…</span>
-            <button class="refresh-btn" id="pulseRefresh" aria-label="Refresh news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-3-6.7L21 8M21 3v5h-5"/></svg>Refresh</button>
-          </div>
-        </div>
-
-        <div class="ticker reveal" aria-label="Latest headlines">
-          <span class="ticker-label">BREAKING</span>
-          <div class="ticker-view"><div class="ticker-track" id="tickerTrack"></div></div>
-        </div>
-
-        <div class="sources" id="pulseSources" role="toolbar" aria-label="Filter by source"></div>
-
-        <div class="news-grid">
-          <div id="newsFeature"><div class="skel skel-feature"></div></div>
-          <div class="news-list" id="newsList" aria-live="polite">
-            <div class="skel skel-item"></div><div class="skel skel-item"></div><div class="skel skel-item"></div><div class="skel skel-item"></div><div class="skel skel-item"></div>
-          </div>
-        </div>
-        <p class="pulse-note">Headlines link to their original publishers. Content belongs to the respective sources.</p>
       </div>
     </section>
 
@@ -668,6 +635,39 @@
         </div>
       </div>
     </section>
+    <!-- ================= ANALYTICS PULSE (LIVE NEWS) ================= -->
+    <section class="section pulse" id="pulse" style="padding-block: 40px 110px;">
+      <div class="container">
+        <div class="pulse-head">
+          <div class="section-head">
+            <span class="eyebrow reveal">Analytics pulse · live</span>
+            <h2 class="split reveal" data-delay="1">What's new in <span class="grad">data analytics.</span></h2>
+            <p class="reveal" data-delay="2">Live headlines and articles from the Power BI blog, KDnuggets, Towards Data Science, DEV Community and Hacker News. Updates automatically.</p>
+          </div>
+          <div class="pulse-status reveal">
+            <span class="live">LIVE</span>
+            <span class="pulse-meta" id="pulseMeta">Connecting to live feeds…</span>
+            <button class="refresh-btn" id="pulseRefresh" aria-label="Refresh news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-3-6.7L21 8M21 3v5h-5"/></svg>Refresh</button>
+          </div>
+        </div>
+
+        <div class="ticker reveal" aria-label="Latest headlines">
+          <span class="ticker-label">BREAKING</span>
+          <div class="ticker-view"><div class="ticker-track" id="tickerTrack"></div></div>
+        </div>
+
+        <div class="sources" id="pulseSources" role="toolbar" aria-label="Filter by source"></div>
+
+        <div class="news-grid">
+          <div id="newsFeature"><div class="skel skel-feature"></div></div>
+          <div class="news-list" id="newsList" aria-live="polite">
+            <div class="skel skel-item"></div><div class="skel skel-item"></div><div class="skel skel-item"></div><div class="skel skel-item"></div><div class="skel skel-item"></div>
+          </div>
+        </div>
+        <p class="pulse-note">Headlines link to their original publishers. Content belongs to the respective sources.</p>
+      </div>
+    </section>
+
   </main>
 
   <!-- ================= FOOTER ================= -->
