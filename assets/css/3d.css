@@ -1,5 +1,5 @@
 /* =====================================================================
-   3D LAYER — extruded type, perspective reveals, globe, tool cube
+   3D LAYER — extruded type, perspective reveals, tool cube
    ===================================================================== */
 
 /* 3D perspective reveals (override the flat slide) */
@@ -37,35 +37,6 @@
   text-shadow: var(--ext2, 1px 1px 0 #8b94a6, 2px 2px 0 #6f7889, 3px 3px 0 #575f6e, 4px 4px 0 #424955, 5px 5px 0 #31363f, 6px 6px 0 #22262d, 7px 7px 0 #16191e, 10px 14px 24px rgba(0,0,0,.7));
 }
 .hero-content { will-change: transform, opacity; }
-
-/* Career globe */
-.globe-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-.globe-stage { position: relative; aspect-ratio: 1; max-width: 560px; width: 100%; margin-inline: auto; cursor: grab; touch-action: pan-y; }
-.globe-stage:active { cursor: grabbing; }
-.globe-stage::before { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(45,212,191,.16), rgba(226,182,89,.06) 45%, transparent 70%); filter: blur(10px); }
-#globe { position: relative; width: 100%; height: 100%; display: block; }
-.globe-labels { position: absolute; inset: 0; pointer-events: none; }
-.globe-label {
-  position: absolute; left: 0; top: 0; white-space: nowrap;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .06em; padding: 4px 8px; border-radius: 6px;
-  background: rgba(6,10,19,.8); border: 1px solid var(--line-2); color: var(--text); transition: opacity .3s, border-color .3s, color .3s;
-}
-.globe-label.hot { border-color: var(--gold); color: var(--gold-2); box-shadow: 0 0 20px -4px rgba(226,182,89,.6); }
-.globe-hint { position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; }
-.globe-copy h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 4.4vw, 50px); line-height: 1.08; letter-spacing: -.03em; margin: 16px 0 14px; }
-.globe-copy > p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
-.stops { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: stop; }
-.stops li {
-  position: relative; padding: 14px 16px 14px 60px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel);
-  cursor: pointer; transition: border-color .3s, background .3s, opacity 1s var(--ease), transform .6s var(--ease);
-}
-.stops li::before {
-  counter-increment: stop; content: "0" counter(stop); position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-  font-family: var(--mono); font-size: 12px; color: var(--gold); width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: rgba(226,182,89,.1);
-}
-.stops li b { display: block; font-size: 14.5px; font-weight: 600; }
-.stops li span { font-size: 13px; color: var(--muted); }
-.stops li.in:hover, .stops li.in.on { border-color: rgba(226,182,89,.45); background: var(--panel-2); transform: translateX(8px); }
 
 /* Studio head + 3D tool cube */
 .studio-head { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
@@ -110,7 +81,6 @@
 .edu-card, .focus, .kpi { transform-style: preserve-3d; }
 
 @media (max-width: 900px) {
-  .globe-grid { grid-template-columns: 1fr; }
   .studio-head { flex-direction: column; align-items: flex-start; gap: 10px; }
   .cube-scene { width: 110px; height: 110px; margin: 0 0 50px 20px; }
   .f-front { transform: translateZ(55px); } .f-back { transform: rotateY(180deg) translateZ(55px); }
