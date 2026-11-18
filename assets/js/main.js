@@ -191,8 +191,8 @@
 
   /* =====================================================================
      3D Hero — Dubai skyline holograms + analytics scene
-     A living terrain of data bars that ripples under the cursor, floating
-     glass dashboard panels with live charts, and rising data particles.
+     A living terrain of data bars that ripples under the cursor, a Dubai
+     skyline of wireframe holograms on a glowing platform, and rising particles.
      ===================================================================== */
   function initSkyline() {
     const canvas = $("#skyline");
@@ -242,7 +242,7 @@
     grid.material.opacity = 0.06;
     scene.add(grid);
 
-    /* ---------- Floating holographic dashboard panels ---------- */
+    /* ---------- Canvas-texture hologram panel helper (used by the location tag) ---------- */
     const makePanel = (w, h, draw) => {
       const cv = document.createElement("canvas");
       cv.width = 512; cv.height = Math.round(512 * (h / w));
@@ -256,48 +256,7 @@
       scene.add(mesh);
       return panel;
     };
-    const frame = (ctx, W, H, title) => {
-      ctx.clearRect(0, 0, W, H);
-      const g = ctx.createLinearGradient(0, 0, W, H);
-      g.addColorStop(0, "rgba(22,34,60,0.82)");
-      g.addColorStop(1, "rgba(8,14,28,0.72)");
-      ctx.fillStyle = g;
-      ctx.strokeStyle = "rgba(246,217,143,0.65)";
-      ctx.lineWidth = 3;
-      const r = 26;
-      ctx.beginPath();
-      ctx.moveTo(r, 2); ctx.arcTo(W - 2, 2, W - 2, H - 2, r); ctx.arcTo(W - 2, H - 2, 2, H - 2, r);
-      ctx.arcTo(2, H - 2, 2, 2, r); ctx.arcTo(2, 2, W - 2, 2, r); ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#c9d1de";
-      ctx.font = "600 26px Inter, sans-serif";
-      ctx.fillText(title, 28, 50);
-      ctx.fillStyle = "#2dd4bf";
-      ctx.beginPath(); ctx.arc(W - 40, 42, 8, 0, Math.PI * 2); ctx.fill();
-    };
 
-    const series = Array.from({ length: 24 }, (_, i) => 50 + Math.sin(i / 2.5) * 18 + i * 1.4);
-    const linePanel = makePanel(13, 7.5, (ctx, W, H, t) => {
-      frame(ctx, W, H, "Sales Trend · Live");
-      const pad = 34, top = 80, bottom = H - 34;
-      const max = Math.max(...series) + 6, min = Math.min(...series) - 6;
-      const X = (i) => pad + (i / (series.length - 1)) * (W - pad * 2);
-      const Y = (v) => bottom - ((v - min) / (max - min)) * (bottom - top);
-      ctx.strokeStyle = "rgba(255,255,255,0.07)"; ctx.lineWidth = 1;
-      for (let k = 0; k < 4; k++) { const y = top + (k / 3) * (bottom - top); ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke(); }
-      const grad = ctx.createLinearGradient(0, top, 0, bottom);
-      grad.addColorStop(0, "rgba(226,182,89,0.45)"); grad.addColorStop(1, "rgba(226,182,89,0)");
-      ctx.beginPath(); series.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
-      ctx.lineTo(X(series.length - 1), bottom); ctx.lineTo(X(0), bottom); ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
-      ctx.beginPath(); series.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
-      ctx.strokeStyle = "#f6d98f"; ctx.lineWidth = 4; ctx.stroke();
-      const lx = X(series.length - 1), ly = Y(series[series.length - 1]);
-      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(lx, ly, 7, 0, Math.PI * 2); ctx.fill();
-    });
-
-    // One focused live panel keeps the scene clean; the terrain itself is the bar chart.
-    const panels = [{ p: linePanel, base: new T.Vector3(offX + 5, 6.5, 6), bob: 0 }];
-    if (isSmall) panels[0].base.set(0, 15, -8);
 
     /* ---------- Dubai skyline as data holograms ---------- */
     // Wireframe landmarks rising behind the data terrain. Fog is disabled on
@@ -527,7 +486,6 @@
 
     const easeOut = (t) => 1 - Math.pow(1 - Math.min(Math.max(t, 0), 1), 3);
     const t0 = performance.now();
-    let lastPanelDraw = 0;
 
     const render = (now) => {
       const t = reduceMotion ? 6 : (now - t0) / 1000;
@@ -576,20 +534,6 @@
       if (bars.instanceColor) bars.instanceColor.needsUpdate = true;
       while (waves.length && nowS - waves[0].t0 > 4) waves.shift();
 
-      // panels float, gently face the camera, fade in after the terrain
-      panels.forEach(({ p, base, bob }) => {
-        p.mesh.scale.setScalar(isSmall ? 1 : 0.85);
-        p.mesh.position.set(base.x, base.y + Math.sin(t * 0.8 + bob) * 0.6, base.z);
-        p.mesh.lookAt(camera.position);
-        p.mesh.rotateY(Math.sin(t * 0.4 + bob) * 0.12);
-        p.mesh.material.opacity = easeOut((t - 1.6 - bob * 0.15) / 1.2) * (isSmall ? 0.3 : 0.95);
-      });
-      if (!reduceMotion && now - lastPanelDraw > 900) {
-        lastPanelDraw = now;
-        series.shift();
-        series.push(Math.max(30, Math.min(110, series[series.length - 1] + (Math.random() - 0.4) * 9)));
-        linePanel.redraw(t);
-      }
 
       // Dubai holograms: rise in, scan ring sweeps the tower, HUD ring orbits
       holoParts.forEach((p, i) => (p.scale.y = Math.max(0.001, easeOut((t - 1.0 - i * 0.25) / 1.8))));
