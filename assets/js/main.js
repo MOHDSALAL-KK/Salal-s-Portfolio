@@ -191,8 +191,8 @@
 
   /* =====================================================================
      3D Hero — Dubai skyline holograms + analytics scene
-     A living terrain of data bars that ripples under the cursor, a Dubai
-     skyline of wireframe holograms on a glowing platform, and rising particles.
+     A Dubai skyline of wireframe holograms on a glowing round platform,
+     with a fixed camera framing, rising particles and a starfield.
      ===================================================================== */
   function initSkyline() {
     const canvas = $("#skyline");
@@ -206,7 +206,7 @@
     renderer.setClearColor(0x060a13, 1);
 
     const scene = new T.Scene();
-    scene.fog = new T.FogExp2(0x060a13, 0.022);
+    scene.fog = new T.FogExp2(0x060a13, 0.01);
     const camera = new T.PerspectiveCamera(45, 1, 0.1, 300);
 
     scene.add(new T.AmbientLight(0x8090b0, 0.6));
@@ -217,30 +217,8 @@
     rim.position.set(30, 15, -30);
     scene.add(rim);
 
-    /* ---------- Data terrain (instanced bars) ---------- */
-    const COLS = isSmall ? 30 : 46, ROWS = isSmall ? 20 : 28, GAP = 1.15;
-    const COUNT = COLS * ROWS;
-    const barGeo = new T.BoxGeometry(0.82, 1, 0.82);
-    barGeo.translate(0, 0.5, 0);
-    const barMat = new T.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35, metalness: 0.55, emissive: 0x0a1424 });
-    const bars = new T.InstancedMesh(barGeo, barMat, COUNT);
-    bars.instanceMatrix.setUsage(T.DynamicDrawUsage);
-    scene.add(bars);
-    const offX = isSmall ? 0 : 8; // shift terrain right so the hero text has room
-    const cells = [];
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        cells.push({ x: (c - COLS / 2) * GAP + offX, z: (r - ROWS / 2) * GAP - 6, h: 0.1 });
-      }
-    }
-    const lowC = new T.Color(0x123a4a), midC = new T.Color(0x2dd4bf), highC = new T.Color(0xf6d98f), tmpC = new T.Color();
-    const dummy = new T.Object3D();
+    const offX = isSmall ? 0 : 8; // layout offset so the hero text keeps the left side
 
-    // Floor grid + glow plate under the terrain
-    const grid = new T.GridHelper(160, 70, 0x2dd4bf, 0x2dd4bf);
-    grid.material.transparent = true;
-    grid.material.opacity = 0.06;
-    scene.add(grid);
 
     /* ---------- Canvas-texture hologram panel helper (used by the location tag) ---------- */
     const makePanel = (w, h, draw) => {
@@ -426,12 +404,18 @@
     const holoParts = [tower, sail, museum, frameT];
     holoParts.forEach((p) => (p.scale.y = 0.001));
 
+    // Fixed composition: skyline on the right, text on the left
+    const CAM = isSmall
+      ? { pos: new T.Vector3(0, 30, 70), look: new T.Vector3(-3, 30, -52) }
+      : { pos: new T.Vector3(20, 20, 30), look: new T.Vector3(-14, 10, -55) };
+    const camPos = new T.Vector3();
+
     /* ---------- Rising data particles ---------- */
     const PN = isSmall ? 350 : 800;
     const pPos = new Float32Array(PN * 3), pSpeed = new Float32Array(PN);
     const pr = seeded(11);
     for (let i = 0; i < PN; i++) {
-      pPos.set([(pr() - 0.5) * 90 + offX, pr() * 40, (pr() - 0.5) * 60 - 8], i * 3);
+      pPos.set([(pr() - 0.5) * 110 + (isSmall ? 0 : 16), pr() * 40, -20 - pr() * 60], i * 3);
       pSpeed[i] = 0.02 + pr() * 0.06;
     }
     const pGeo = new T.BufferGeometry();
@@ -460,26 +444,10 @@
     window.addEventListener("resize", resize);
 
     let mx = 0, my = 0, cmx = 0, cmy = 0;
-    const ndc = new T.Vector2(-10, -10);
-    const ray = new T.Raycaster();
-    const floor = new T.Plane(new T.Vector3(0, 1, 0), 0);
-    const hit = new T.Vector3(9999, 0, 9999), hitSmooth = new T.Vector3(9999, 0, 9999);
-    let pointerActive = false;
     window.addEventListener("pointermove", (e) => {
       mx = e.clientX / window.innerWidth - 0.5;
       my = e.clientY / window.innerHeight - 0.5;
-      const r = canvas.getBoundingClientRect();
-      ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
-      pointerActive = e.clientY < r.bottom;
     }, { passive: true });
-
-    // Click / tap sends a shockwave through the terrain
-    const waves = [];
-    canvas.parentElement.addEventListener("pointerdown", (e) => {
-      if (e.target.closest("a, button")) return;
-      if (hit.x < 9000) waves.push({ x: hit.x, z: hit.z, t0: performance.now() / 1000 });
-      if (waves.length > 4) waves.shift();
-    });
 
     let visible = true;
     new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(canvas);
@@ -489,51 +457,6 @@
 
     const render = (now) => {
       const t = reduceMotion ? 6 : (now - t0) / 1000;
-      const nowS = now / 1000;
-      const intro = easeOut((t - 0.4) / 2.2);
-
-      // pointer → floor intersection for the ripple
-      if (pointerActive && finePointer && !reduceMotion) {
-        ray.setFromCamera(ndc, camera);
-        if (ray.ray.intersectPlane(floor, hit) === null) hit.set(9999, 0, 9999);
-      } else hit.set(9999, 0, 9999);
-      hitSmooth.lerp(hit, hit.x > 9000 ? 1 : 0.12);
-
-      for (let i = 0; i < COUNT; i++) {
-        const c = cells[i];
-        let h = 1.4
-          + Math.sin(c.x * 0.22 + t * 0.7) * Math.cos(c.z * 0.28 + t * 0.5) * 1.6
-          + Math.sin(c.x * 0.09 - c.z * 0.13 + t * 0.35) * 1.4
-          + Math.max(0, Math.sin(c.x * 0.5 + c.z * 0.4)) * 0.6;
-        // cursor hill
-        const dx = c.x - hitSmooth.x, dz = c.z - hitSmooth.z;
-        const d2 = dx * dx + dz * dz;
-        h += 6.5 * Math.exp(-d2 / 22);
-        // click shockwaves
-        for (const w of waves) {
-          const age = nowS - w.t0;
-          const dist = Math.hypot(c.x - w.x, c.z - w.z);
-          const front = age * 16;
-          h += Math.max(0, 3.2 * Math.exp(-((dist - front) ** 2) / 6) * Math.exp(-age * 1.1));
-        }
-        // intro: rise from the centre outwards
-        const delay = Math.hypot(c.x - offX, c.z + 6) / 40;
-        const k = easeOut((t - 0.3 - delay) / 1.4);
-        h = Math.max(0.08, h * k);
-        // depth fade: shorter towards the front so text stays readable
-        dummy.position.set(c.x, 0, c.z);
-        dummy.scale.set(1, h, 1);
-        dummy.updateMatrix();
-        bars.setMatrixAt(i, dummy.matrix);
-        const n = Math.min(h / 8, 1);
-        if (n < 0.5) tmpC.copy(lowC).lerp(midC, n * 2);
-        else tmpC.copy(midC).lerp(highC, (n - 0.5) * 2);
-        bars.setColorAt(i, tmpC);
-      }
-      bars.instanceMatrix.needsUpdate = true;
-      if (bars.instanceColor) bars.instanceColor.needsUpdate = true;
-      while (waves.length && nowS - waves[0].t0 > 4) waves.shift();
-
 
       // Dubai holograms: rise in, scan ring sweeps the tower, HUD ring orbits
       holoParts.forEach((p, i) => (p.scale.y = Math.max(0.001, easeOut((t - 1.0 - i * 0.25) / 1.8))));
@@ -551,12 +474,12 @@
       // location tag floats above the tower and faces the camera
       const topW = new T.Vector3(0, towerTop * tower.scale.y, 0);
       tower.localToWorld(topW);
-      const tagPos = new T.Vector3(topW.x - 15, topW.y - 11 + Math.sin(t * 0.7) * 0.5, topW.z + 6);
+      const tagPos = new T.Vector3(topW.x + 11, topW.y - 3 + Math.sin(t * 0.7) * 0.5, topW.z + 6);
       tag.mesh.position.copy(tagPos);
       tag.mesh.lookAt(camera.position);
       tag.mesh.material.opacity = easeOut((t - 2.6) / 1) * (isSmall ? 0.6 : 0.95);
       const tp = tagLine.geometry.attributes.position;
-      tp.setXYZ(0, tagPos.x + 8, tagPos.y + 1.5, tagPos.z);
+      tp.setXYZ(0, tagPos.x - 8, tagPos.y + 1.5, tagPos.z);
       tp.setXYZ(1, topW.x, topW.y, topW.z);
       tp.needsUpdate = true;
       tagLine.computeLineDistances();
@@ -572,19 +495,15 @@
       }
       stars.rotation.y = t * 0.004;
 
-      // camera: slow orbit + mouse parallax + scroll fly-over
-      cmx += (mx - cmx) * 0.04;
-      cmy += (my - cmy) * 0.04;
-      const sp = reduceMotion ? 0 : Math.min(window.scrollY / window.innerHeight, 1);
-      const spE = sp * sp * (3 - 2 * sp);
-      const orbit = reduceMotion ? 0 : Math.sin(t * 0.07) * 0.16 + cmx * 0.3;
-      const radius = (isSmall ? 62 : 48) * (1 - spE * 0.4);
-      camera.position.set(
-        Math.sin(orbit) * radius + (isSmall ? 0 : offX * 0.3),
-        (isSmall ? 30 : 24) + cmy * -5 + Math.max(0, 2.5 - t) * 6 - spE * 10,
-        Math.cos(orbit) * radius
-      );
-      camera.lookAt(isSmall ? 0 : offX * 0.15 - 9 * (1 - spE), 4 + spE * 2, -8);
+      // camera: fixed framing on the skyline, with a very subtle mouse parallax only
+      cmx += (mx - cmx) * 0.05;
+      cmy += (my - cmy) * 0.05;
+      const par = reduceMotion || !finePointer ? 0 : 1;
+      // narrower desktop screens: pull the camera back along its view line so nothing clips
+      const k = isSmall ? 1 : Math.min(1.5, Math.max(1, 2.0 / camera.aspect));
+      camPos.copy(CAM.pos).sub(CAM.look).multiplyScalar(k).add(CAM.look);
+      camera.position.set(camPos.x + cmx * 3 * par, camPos.y - cmy * 1.5 * par, camPos.z);
+      camera.lookAt(CAM.look);
 
       renderer.render(scene, camera);
     };
