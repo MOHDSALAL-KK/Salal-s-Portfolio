@@ -1,0 +1,38 @@
+/* =====================================================================
+   Data Runner mini game
+   ===================================================================== */
+.arcade { position: relative; }
+.arcade-card {
+  position: relative; border-radius: var(--radius-lg); border: 1px solid var(--line-2);
+  background: linear-gradient(160deg, #0d1628, #080d18); padding: clamp(16px, 3vw, 28px); overflow: hidden;
+}
+.arcade-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
+.arcade-head .section-head { margin-bottom: 0; }
+.arcade-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.arcade-stat { padding: 10px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); min-width: 92px; }
+.arcade-stat small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
+.arcade-stat b { font-family: var(--display); font-size: 20px; font-variant-numeric: tabular-nums; }
+.runner-wrap { position: relative; width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+#runner { display: block; width: 100%; height: 260px; cursor: pointer; touch-action: manipulation; outline: none; }
+#runner:focus-visible { box-shadow: inset 0 0 0 2px var(--gold); }
+.runner-help { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; color: var(--muted); }
+.kbd { display: inline-block; font-family: var(--mono); font-size: 11.5px; padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line-2); background: rgba(255,255,255,.04); color: var(--text); margin: 0 2px; }
+.runner-pad { display: none; gap: 10px; }
+.runner-pad button {
+  padding: 12px 22px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--panel-2);
+  font-weight: 600; font-size: 14px; user-select: none; -webkit-user-select: none; touch-action: none;
+}
+.runner-pad button:active { background: rgba(226,182,89,.18); border-color: var(--gold); }
+@media (hover: none), (max-width: 700px) {
+  .runner-pad { display: flex; }
+  .runner-keys { display: none; }
+}
+
+/* Offline banner */
+.offline-banner {
+  position: fixed; left: 50%; top: calc(84px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); z-index: 95;
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 999px;
+  background: rgba(10,17,32,.92); border: 1px solid var(--gold); color: var(--text); font-size: 13.5px;
+  box-shadow: var(--shadow); max-width: calc(100% - 24px);
+}
+.offline-banner a { color: var(--gold); font-weight: 600; white-space: nowrap; }

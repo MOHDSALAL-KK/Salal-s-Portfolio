@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/3d.css" />
   <link rel="stylesheet" href="assets/css/news.css" />
+  <link rel="stylesheet" href="assets/css/game.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,6 +43,7 @@
   </div>
 
   <div class="progress" id="progress"></div>
+  <div class="offline-banner" id="offlineBanner" hidden role="status">You are offline. Take a break with Data Runner <a href="#arcade">Play ↓</a></div>
   <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- Navigation -->
@@ -88,7 +90,6 @@
           <div class="hero-status">
             <span class="chip"><span class="chip-dot"></span>Open to opportunities</span>
             <span class="chip">📍 Dubai, UAE</span>
-            <span class="chip">UAE Employment Visa</span>
           </div>
           <p class="marhaba">مرحباً <span>MARHABA — WELCOME</span></p>
           <h1>
@@ -180,7 +181,7 @@
 
           <div class="facts reveal">
             <div class="fact"><small>Location</small><span>Dubai, United Arab Emirates</span></div>
-            <div class="fact"><small>Visa</small><span>UAE Employment Visa</span></div>
+            <div class="fact"><small>Focus</small><span>Retail &amp; e-commerce analytics</span></div>
             <div class="fact"><small>Education</small><span>MSc Big Data Analytics (2024)</span></div>
             <div class="fact"><small>Languages</small><span>English · Hindi · Malayalam · Tamil</span></div>
           </div>
@@ -587,7 +588,7 @@
             <div>
               <span class="eyebrow">Let's talk</span>
               <h2 class="split">Looking for a data analyst <span class="grad">in Dubai?</span></h2>
-              <p class="contact-lead">I am based in Dubai with a valid UAE Employment Visa, and I am open to MIS, senior data analyst, BI and inventory analytics roles across the UAE. If you are hiring, I would be glad to talk.</p>
+              <p class="contact-lead">I am based in Dubai and open to MIS, senior data analyst, BI and inventory analytics roles across the UAE. If you are hiring, I would be glad to talk.</p>
               <div class="channels">
                 <a class="channel" href="https://wa.me/971586582599?text=Hi%20Mohammed%20Salal%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener">
                   <span class="channel-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z"/></svg></span>
@@ -663,6 +664,37 @@
       </div>
     </section>
 
+    <!-- ================= DATA RUNNER (MINI GAME) ================= -->
+    <section class="section arcade" id="arcade" style="padding-block: 20px 110px;">
+      <div class="container">
+        <div class="arcade-card reveal">
+          <div class="arcade-head">
+            <div class="section-head">
+              <span class="eyebrow">Take a break</span>
+              <h2 class="split">Data Runner: <span class="grad">keep the pipeline alive.</span></h2>
+              <p>Drive the data car through the night, jump the bugs and NULLs, drop low under the 404 drones and collect KPI coins. Works offline, too.</p>
+            </div>
+            <div class="arcade-stats" aria-live="polite">
+              <div class="arcade-stat"><small>Score</small><b id="runnerScore">0</b></div>
+              <div class="arcade-stat"><small>Best</small><b id="runnerHi">0</b></div>
+              <div class="arcade-stat"><small>Speed</small><b id="runnerSpeed">1.0×</b></div>
+            </div>
+          </div>
+          <div class="runner-wrap">
+            <canvas id="runner" tabindex="0" aria-label="Data Runner game. Press Space or Up to jump, Down to drop low. Click or tap to start."></canvas>
+          </div>
+          <div class="runner-help">
+            <span class="runner-keys">Click the game, then <span class="kbd">Space</span>/<span class="kbd">↑</span> to jump · <span class="kbd">↓</span> to drop low</span>
+            <div class="runner-pad">
+              <button id="runnerJump" type="button">▲ Jump</button>
+              <button id="runnerDuck" type="button">▼ Low</button>
+            </div>
+            <span>Best score is saved on this device.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ================= FOOTER ================= -->
@@ -715,5 +747,6 @@
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/3d.js" defer></script>
   <script src="assets/js/news.js" defer></script>
+  <script src="assets/js/game.js" defer></script>
 </body>
 </html>
