@@ -295,47 +295,9 @@
       ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(lx, ly, 7, 0, Math.PI * 2); ctx.fill();
     });
 
-    const barsData = [62, 78, 54, 90, 70, 84];
-    const barPanel = makePanel(9, 7, (ctx, W, H, t) => {
-      frame(ctx, W, H, "Target vs Actual");
-      const pad = 36, top = 84, bottom = H - 36, bw = (W - pad * 2) / barsData.length;
-      barsData.forEach((v, i) => {
-        const h = (v / 100) * (bottom - top);
-        const x = pad + i * bw + bw * 0.18;
-        const g = ctx.createLinearGradient(0, bottom - h, 0, bottom);
-        g.addColorStop(0, "#f2c811"); g.addColorStop(1, "rgba(242,200,17,0.35)");
-        ctx.fillStyle = g; ctx.fillRect(x, bottom - h, bw * 0.64, h);
-        const tgt = bottom - ((v + (i % 2 ? -8 : 7)) / 100) * (bottom - top);
-        ctx.fillStyle = "#2dd4bf"; ctx.fillRect(x - 4, tgt - 2, bw * 0.64 + 8, 4);
-      });
-    });
-
-    let mix = [42, 24, 18, 16];
-    const donutPanel = makePanel(7, 7, (ctx, W, H, t) => {
-      frame(ctx, W, H, "Category Mix");
-      const cx = W / 2, cy = H / 2 + 26, R = Math.min(W, H) * 0.3;
-      const cols = ["#f2c811", "#2dd4bf", "#5b9cff", "#fb7185"];
-      const total = mix.reduce((a, b) => a + b, 0);
-      let a0 = -Math.PI / 2 + t * 0.15;
-      mix.forEach((v, i) => {
-        const a1 = a0 + (v / total) * Math.PI * 2;
-        ctx.beginPath(); ctx.arc(cx, cy, R, a0 + 0.03, a1 - 0.03); ctx.strokeStyle = cols[i]; ctx.lineWidth = 34; ctx.stroke();
-        a0 = a1;
-      });
-      ctx.fillStyle = "#e9edf5"; ctx.font = "700 44px 'Space Grotesk', Inter, sans-serif"; ctx.textAlign = "center";
-      ctx.fillText(`${Math.round((mix[0] / total) * 100)}%`, cx, cy + 15); ctx.textAlign = "left";
-    });
-
-    const panels = [
-      { p: linePanel, base: new T.Vector3(offX + 7, 8, 3), bob: 0 },
-      { p: barPanel, base: new T.Vector3(offX - 4, 1.2, 11), bob: 1.7 },
-      { p: donutPanel, base: new T.Vector3(offX - 5, 5, 3), bob: 3.1 },
-    ];
-    if (isSmall) {
-      panels[0].base.set(0, 15, -8);
-      panels[1].base.set(9, 9, -16);
-      panels[2].base.set(-9, 9, -16);
-    }
+    // One focused live panel keeps the scene clean; the terrain itself is the bar chart.
+    const panels = [{ p: linePanel, base: new T.Vector3(offX + 5, 6.5, 6), bob: 0 }];
+    if (isSmall) panels[0].base.set(0, 15, -8);
 
     /* ---------- Dubai skyline as data holograms ---------- */
     // Wireframe landmarks rising behind the data terrain. Fog is disabled on
@@ -354,7 +316,7 @@
       return g;
     };
     const L = isSmall ? { tower: [2, -70], sail: [24, -66], museum: [-20, -66], frame: [-40, -80] }
-                      : { tower: [offX + 14, -88], sail: [offX + 44, -80], museum: [offX - 12, -84], frame: [offX + 70, -96] };
+                      : { tower: [offX + 14, -88], sail: [offX + 38, -82], museum: [offX - 12, -84], frame: [offX + 54, -96] };
 
     // 1) Supertall tower — tiered hexagonal setbacks + spire, with a scanning data ring
     const tower = new T.Group();
@@ -475,6 +437,33 @@
     tagLineGeo.setAttribute("position", new T.Float32BufferAttribute([0, 0, 0, 0, 0, 0], 3));
     const tagLine = new T.Line(tagLineGeo, new T.LineDashedMaterial({ color: 0x2dd4bf, dashSize: 0.6, gapSize: 0.4, transparent: true, opacity: 0.7, fog: false }));
     scene.add(tagLine);
+    tag.mesh.scale.setScalar(isSmall ? 1.6 : 2.1);
+
+    // Ground the skyline: glowing polar-grid platform + horizon haze under the landmarks
+    const baseCx = (L.museum[0] + L.frame[0]) / 2, baseCz = L.tower[1] - 2;
+    const polar = new T.PolarGridHelper(62, 24, 8, 96, 0x2dd4bf, 0x2dd4bf);
+    polar.material.transparent = true;
+    polar.material.opacity = 0.18;
+    polar.material.fog = false;
+    polar.position.set(baseCx, 0.05, baseCz);
+    holo.add(polar);
+    const glowCv = document.createElement("canvas");
+    glowCv.width = glowCv.height = 256;
+    const gctx = glowCv.getContext("2d");
+    const rg = gctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    rg.addColorStop(0, "rgba(246,217,143,0.55)");
+    rg.addColorStop(0.35, "rgba(45,212,191,0.22)");
+    rg.addColorStop(1, "rgba(45,212,191,0)");
+    gctx.fillStyle = rg;
+    gctx.fillRect(0, 0, 256, 256);
+    const glowDisc = new T.Mesh(new T.PlaneGeometry(150, 110), new T.MeshBasicMaterial({ map: new T.CanvasTexture(glowCv), transparent: true, depthWrite: false, fog: false, blending: T.AdditiveBlending }));
+    glowDisc.rotation.x = -Math.PI / 2;
+    glowDisc.position.set(baseCx, 0.02, baseCz);
+    holo.add(glowDisc);
+    // horizon light line
+    const horizon = new T.Mesh(new T.PlaneGeometry(120, 0.3), new T.MeshBasicMaterial({ color: 0xf6d98f, transparent: true, opacity: 0.35, fog: false }));
+    horizon.position.set(baseCx, 0.2, baseCz - 30);
+    holo.add(horizon);
     const holoParts = [tower, sail, museum, frameT];
     holoParts.forEach((p) => (p.scale.y = 0.001));
 
@@ -589,7 +578,7 @@
 
       // panels float, gently face the camera, fade in after the terrain
       panels.forEach(({ p, base, bob }) => {
-        p.mesh.scale.setScalar(isSmall ? 1 : 0.78);
+        p.mesh.scale.setScalar(isSmall ? 1 : 0.85);
         p.mesh.position.set(base.x, base.y + Math.sin(t * 0.8 + bob) * 0.6, base.z);
         p.mesh.lookAt(camera.position);
         p.mesh.rotateY(Math.sin(t * 0.4 + bob) * 0.12);
@@ -599,9 +588,7 @@
         lastPanelDraw = now;
         series.shift();
         series.push(Math.max(30, Math.min(110, series[series.length - 1] + (Math.random() - 0.4) * 9)));
-        barsData.forEach((v, i) => (barsData[i] = Math.max(35, Math.min(98, v + (Math.random() - 0.5) * 8))));
-        mix = mix.map((v) => Math.max(8, v + (Math.random() - 0.5) * 3));
-        linePanel.redraw(t); barPanel.redraw(t); donutPanel.redraw(t);
+        linePanel.redraw(t);
       }
 
       // Dubai holograms: rise in, scan ring sweeps the tower, HUD ring orbits
@@ -620,12 +607,12 @@
       // location tag floats above the tower and faces the camera
       const topW = new T.Vector3(0, towerTop * tower.scale.y, 0);
       tower.localToWorld(topW);
-      const tagPos = new T.Vector3(topW.x - 9, topW.y - 8 + Math.sin(t * 0.7) * 0.5, topW.z + 6);
+      const tagPos = new T.Vector3(topW.x - 15, topW.y - 11 + Math.sin(t * 0.7) * 0.5, topW.z + 6);
       tag.mesh.position.copy(tagPos);
       tag.mesh.lookAt(camera.position);
       tag.mesh.material.opacity = easeOut((t - 2.6) / 1) * (isSmall ? 0.6 : 0.95);
       const tp = tagLine.geometry.attributes.position;
-      tp.setXYZ(0, tagPos.x + 4, tagPos.y + 1.1, tagPos.z);
+      tp.setXYZ(0, tagPos.x + 8, tagPos.y + 1.5, tagPos.z);
       tp.setXYZ(1, topW.x, topW.y, topW.z);
       tp.needsUpdate = true;
       tagLine.computeLineDistances();
