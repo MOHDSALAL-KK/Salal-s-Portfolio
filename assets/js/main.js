@@ -190,7 +190,9 @@
   }, 1600);
 
   /* =====================================================================
-     3D Skyline — Dubai at night, every tower is a bar in a chart
+     3D Hero — holographic analytics scene
+     A living terrain of data bars that ripples under the cursor, floating
+     glass dashboard panels with live charts, and rising data particles.
      ===================================================================== */
   function initSkyline() {
     const canvas = $("#skyline");
@@ -204,154 +206,161 @@
     renderer.setClearColor(0x060a13, 1);
 
     const scene = new T.Scene();
-    scene.fog = new T.FogExp2(0x060a13, 0.018);
-    const camera = new T.PerspectiveCamera(42, 1, 0.1, 400);
+    scene.fog = new T.FogExp2(0x060a13, 0.022);
+    const camera = new T.PerspectiveCamera(45, 1, 0.1, 300);
 
-    scene.add(new T.AmbientLight(0x6c7a99, 0.55));
-    const moon = new T.DirectionalLight(0xf6d98f, 0.9);
-    moon.position.set(-30, 50, 30);
-    scene.add(moon);
-    const rim = new T.DirectionalLight(0x2dd4bf, 0.5);
-    rim.position.set(40, 20, -30);
+    scene.add(new T.AmbientLight(0x8090b0, 0.6));
+    const key = new T.DirectionalLight(0xf6d98f, 1.0);
+    key.position.set(-20, 40, 25);
+    scene.add(key);
+    const rim = new T.DirectionalLight(0x2dd4bf, 0.8);
+    rim.position.set(30, 15, -30);
     scene.add(rim);
 
-    // Ground grid — desert gold
-    const grid = new T.GridHelper(220, 88, 0xe2b659, 0xe2b659);
-    grid.material.transparent = true;
-    grid.material.opacity = 0.09;
-    scene.add(grid);
-
-    // Water-like reflective plane
-    const ground = new T.Mesh(new T.PlaneGeometry(400, 400), new T.MeshBasicMaterial({ color: 0x070c17 }));
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -0.02;
-    scene.add(ground);
-
-    const rand = seeded(42);
-    const unitBox = new T.BoxGeometry(1, 1, 1);
-    unitBox.translate(0, 0.5, 0);
-    const unitEdges = new T.EdgesGeometry(unitBox);
-    const bodyMat = new T.MeshStandardMaterial({ color: 0x0c1528, roughness: 0.6, metalness: 0.4, emissive: 0x050a14 });
-    const edgeGold = new T.LineBasicMaterial({ color: 0xe2b659, transparent: true, opacity: 0.7 });
-    const edgeTeal = new T.LineBasicMaterial({ color: 0x2dd4bf, transparent: true, opacity: 0.45 });
-    const winMat = new T.PointsMaterial({ color: 0xf6d98f, size: isSmall ? 1.6 : 2, sizeAttenuation: false, transparent: true, opacity: 0.85 });
-
-    const towers = []; // {obj, target, delay}
-    const cityW = isSmall ? 20 : 34;
-    const step = isSmall ? 3 : 2.6;
-    for (let x = -cityW; x <= cityW; x += step) {
-      for (let z = -26; z <= 4; z += step) {
-        if (rand() < 0.28) continue;
-        const dCenter = Math.hypot(x, z + 8);
-        if (dCenter < 4.5) continue; // leave room for the hero tower
-        const heightBoost = Math.max(0, 1 - dCenter / 34);
-        const h = 2 + rand() * 6 + heightBoost * heightBoost * 18 * (0.5 + rand());
-        const w = 1.1 + rand() * 1.1, d = 1.1 + rand() * 1.1;
-
-        const g = new T.Group();
-        g.position.set(x + (rand() - 0.5), 0, z + (rand() - 0.5));
-        const holder = new T.Group(); // scaled for height animation
-        holder.scale.set(w, 0.001, d);
-        const mesh = new T.Mesh(unitBox, bodyMat);
-        const edges = new T.LineSegments(unitEdges, rand() < 0.75 ? edgeGold : edgeTeal);
-        holder.add(mesh, edges);
-
-        // windows: random lit points on the 4 faces (unit space)
-        const nWin = Math.floor(6 + h * 2.2);
-        const pos = new Float32Array(nWin * 3);
-        for (let i = 0; i < nWin; i++) {
-          const face = Math.floor(rand() * 4);
-          const u = rand() - 0.5;
-          const v = 0.05 + rand() * 0.9;
-          const o = 0.505;
-          const [px, pz] = face === 0 ? [u, o] : face === 1 ? [u, -o] : face === 2 ? [o, u] : [-o, u];
-          pos.set([px, v, pz], i * 3);
-        }
-        const wg = new T.BufferGeometry();
-        wg.setAttribute("position", new T.BufferAttribute(pos, 3));
-        holder.add(new T.Points(wg, winMat));
-
-        g.add(holder);
-        scene.add(g);
-        towers.push({ obj: holder, target: h, delay: 0.25 + (dCenter / 40) * 1.2 + rand() * 0.3 });
+    /* ---------- Data terrain (instanced bars) ---------- */
+    const COLS = isSmall ? 30 : 46, ROWS = isSmall ? 20 : 28, GAP = 1.15;
+    const COUNT = COLS * ROWS;
+    const barGeo = new T.BoxGeometry(0.82, 1, 0.82);
+    barGeo.translate(0, 0.5, 0);
+    const barMat = new T.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35, metalness: 0.55, emissive: 0x0a1424 });
+    const bars = new T.InstancedMesh(barGeo, barMat, COUNT);
+    bars.instanceMatrix.setUsage(T.DynamicDrawUsage);
+    scene.add(bars);
+    const offX = isSmall ? 0 : 8; // shift terrain right so the hero text has room
+    const cells = [];
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        cells.push({ x: (c - COLS / 2) * GAP + offX, z: (r - ROWS / 2) * GAP - 6, h: 0.1 });
       }
     }
+    const lowC = new T.Color(0x123a4a), midC = new T.Color(0x2dd4bf), highC = new T.Color(0xf6d98f), tmpC = new T.Color();
+    const dummy = new T.Object3D();
 
-    // Hero tower — tiered, tapering spire inspired by Dubai's tallest skyline
-    const hero = new T.Group();
-    hero.position.set(0, 0, -8);
-    const tiers = [
-      [2.6, 7], [2.15, 6], [1.75, 5.5], [1.4, 5], [1.05, 4.5], [0.75, 4], [0.45, 3.5], [0.22, 3],
+    // Floor grid + glow plate under the terrain
+    const grid = new T.GridHelper(160, 70, 0x2dd4bf, 0x2dd4bf);
+    grid.material.transparent = true;
+    grid.material.opacity = 0.06;
+    scene.add(grid);
+
+    /* ---------- Floating holographic dashboard panels ---------- */
+    const makePanel = (w, h, draw) => {
+      const cv = document.createElement("canvas");
+      cv.width = 512; cv.height = Math.round(512 * (h / w));
+      const ctx = cv.getContext("2d");
+      const tex = new T.CanvasTexture(cv);
+      const mat = new T.MeshBasicMaterial({ map: tex, transparent: true, side: T.DoubleSide, depthWrite: false, fog: false });
+      const mesh = new T.Mesh(new T.PlaneGeometry(w, h), mat);
+      const panel = { mesh, ctx, cv, tex, draw };
+      panel.redraw = (t) => { draw(ctx, cv.width, cv.height, t); tex.needsUpdate = true; };
+      panel.redraw(0);
+      scene.add(mesh);
+      return panel;
+    };
+    const frame = (ctx, W, H, title) => {
+      ctx.clearRect(0, 0, W, H);
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, "rgba(22,34,60,0.82)");
+      g.addColorStop(1, "rgba(8,14,28,0.72)");
+      ctx.fillStyle = g;
+      ctx.strokeStyle = "rgba(246,217,143,0.65)";
+      ctx.lineWidth = 3;
+      const r = 26;
+      ctx.beginPath();
+      ctx.moveTo(r, 2); ctx.arcTo(W - 2, 2, W - 2, H - 2, r); ctx.arcTo(W - 2, H - 2, 2, H - 2, r);
+      ctx.arcTo(2, H - 2, 2, 2, r); ctx.arcTo(2, 2, W - 2, 2, r); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#c9d1de";
+      ctx.font = "600 26px Inter, sans-serif";
+      ctx.fillText(title, 28, 50);
+      ctx.fillStyle = "#2dd4bf";
+      ctx.beginPath(); ctx.arc(W - 40, 42, 8, 0, Math.PI * 2); ctx.fill();
+    };
+
+    const series = Array.from({ length: 24 }, (_, i) => 50 + Math.sin(i / 2.5) * 18 + i * 1.4);
+    const linePanel = makePanel(13, 7.5, (ctx, W, H, t) => {
+      frame(ctx, W, H, "Sales Trend · Live");
+      const pad = 34, top = 80, bottom = H - 34;
+      const max = Math.max(...series) + 6, min = Math.min(...series) - 6;
+      const X = (i) => pad + (i / (series.length - 1)) * (W - pad * 2);
+      const Y = (v) => bottom - ((v - min) / (max - min)) * (bottom - top);
+      ctx.strokeStyle = "rgba(255,255,255,0.07)"; ctx.lineWidth = 1;
+      for (let k = 0; k < 4; k++) { const y = top + (k / 3) * (bottom - top); ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke(); }
+      const grad = ctx.createLinearGradient(0, top, 0, bottom);
+      grad.addColorStop(0, "rgba(226,182,89,0.45)"); grad.addColorStop(1, "rgba(226,182,89,0)");
+      ctx.beginPath(); series.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
+      ctx.lineTo(X(series.length - 1), bottom); ctx.lineTo(X(0), bottom); ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+      ctx.beginPath(); series.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
+      ctx.strokeStyle = "#f6d98f"; ctx.lineWidth = 4; ctx.stroke();
+      const lx = X(series.length - 1), ly = Y(series[series.length - 1]);
+      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(lx, ly, 7, 0, Math.PI * 2); ctx.fill();
+    });
+
+    const barsData = [62, 78, 54, 90, 70, 84];
+    const barPanel = makePanel(9, 7, (ctx, W, H, t) => {
+      frame(ctx, W, H, "Target vs Actual");
+      const pad = 36, top = 84, bottom = H - 36, bw = (W - pad * 2) / barsData.length;
+      barsData.forEach((v, i) => {
+        const h = (v / 100) * (bottom - top);
+        const x = pad + i * bw + bw * 0.18;
+        const g = ctx.createLinearGradient(0, bottom - h, 0, bottom);
+        g.addColorStop(0, "#f2c811"); g.addColorStop(1, "rgba(242,200,17,0.35)");
+        ctx.fillStyle = g; ctx.fillRect(x, bottom - h, bw * 0.64, h);
+        const tgt = bottom - ((v + (i % 2 ? -8 : 7)) / 100) * (bottom - top);
+        ctx.fillStyle = "#2dd4bf"; ctx.fillRect(x - 4, tgt - 2, bw * 0.64 + 8, 4);
+      });
+    });
+
+    let mix = [42, 24, 18, 16];
+    const donutPanel = makePanel(7, 7, (ctx, W, H, t) => {
+      frame(ctx, W, H, "Category Mix");
+      const cx = W / 2, cy = H / 2 + 26, R = Math.min(W, H) * 0.3;
+      const cols = ["#f2c811", "#2dd4bf", "#5b9cff", "#fb7185"];
+      const total = mix.reduce((a, b) => a + b, 0);
+      let a0 = -Math.PI / 2 + t * 0.15;
+      mix.forEach((v, i) => {
+        const a1 = a0 + (v / total) * Math.PI * 2;
+        ctx.beginPath(); ctx.arc(cx, cy, R, a0 + 0.03, a1 - 0.03); ctx.strokeStyle = cols[i]; ctx.lineWidth = 34; ctx.stroke();
+        a0 = a1;
+      });
+      ctx.fillStyle = "#e9edf5"; ctx.font = "700 44px 'Space Grotesk', Inter, sans-serif"; ctx.textAlign = "center";
+      ctx.fillText(`${Math.round((mix[0] / total) * 100)}%`, cx, cy + 15); ctx.textAlign = "left";
+    });
+
+    const panels = [
+      { p: linePanel, base: new T.Vector3(offX + 6, 13, -6), bob: 0 },
+      { p: barPanel, base: new T.Vector3(offX + 10, 6, 0), bob: 1.7 },
+      { p: donutPanel, base: new T.Vector3(offX - 6, 9, -16), bob: 3.1 },
     ];
-    let yAcc = 0;
-    const heroMat = new T.MeshStandardMaterial({ color: 0x111d33, roughness: 0.35, metalness: 0.8, emissive: 0x0a1222 });
-    const heroEdge = new T.LineBasicMaterial({ color: 0xf6d98f, transparent: true, opacity: 0.9 });
-    tiers.forEach(([r, h]) => {
-      const geo = new T.CylinderGeometry(r * 0.82, r, h, 6, 1);
-      geo.translate(0, h / 2, 0);
-      const m = new T.Mesh(geo, heroMat);
-      m.position.y = yAcc;
-      const e = new T.LineSegments(new T.EdgesGeometry(geo), heroEdge);
-      e.position.y = yAcc;
-      hero.add(m, e);
-      yAcc += h;
-    });
-    const spireGeo = new T.ConeGeometry(0.12, 9, 6);
-    spireGeo.translate(0, 4.5, 0);
-    const spire = new T.Mesh(spireGeo, new T.MeshBasicMaterial({ color: 0xf6d98f }));
-    spire.position.y = yAcc;
-    hero.add(spire);
-    const beacon = new T.PointLight(0xf6d98f, 2.2, 30);
-    beacon.position.y = yAcc + 9;
-    hero.add(beacon);
-    const heroHeight = yAcc + 9;
-    hero.scale.y = 0.001;
-    scene.add(hero);
-
-    // Glowing line chart arcing over the skyline
-    const pts = [];
-    const lr = seeded(7);
-    for (let i = 0; i <= 12; i++) {
-      const x = -cityW - 4 + (i / 12) * (cityW * 2 + 8);
-      const y = 20 + i * 1.6 + (lr() - 0.5) * 7;
-      pts.push(new T.Vector3(x, y, -2 - Math.sin(i / 2) * 3));
+    if (isSmall) {
+      panels[0].base.set(0, 15, -8);
+      panels[1].base.set(9, 9, -16);
+      panels[2].base.set(-9, 9, -16);
     }
-    const curve = new T.CatmullRomCurve3(pts);
-    const tubeSegs = 300;
-    const tube = new T.TubeGeometry(curve, tubeSegs, 0.09, 6, false);
-    const tubeMesh = new T.Mesh(tube, new T.MeshBasicMaterial({ color: 0x2dd4bf, transparent: true, opacity: 0.9 }));
-    tube.setDrawRange(0, 0);
-    scene.add(tubeMesh);
-    const tubeIndexCount = tube.index.count;
-    // data points on the line
-    const dotMat = new T.MeshBasicMaterial({ color: 0xf6d98f });
-    const dots = pts.slice(1, -1).map((p, i) => {
-      const s = new T.Mesh(new T.SphereGeometry(0.32, 12, 12), dotMat);
-      s.position.copy(p);
-      s.scale.setScalar(0.001);
-      s.userData.t = (i + 1) / 12;
-      scene.add(s);
-      return s;
-    });
-    const runner = new T.Mesh(new T.SphereGeometry(0.5, 16, 16), new T.MeshBasicMaterial({ color: 0xffffff }));
-    const runnerLight = new T.PointLight(0x2dd4bf, 2, 16);
-    runner.add(runnerLight);
-    runner.visible = false;
-    scene.add(runner);
 
-    // Stars / desert dust
-    const starCount = isSmall ? 500 : 1100;
-    const sp = new Float32Array(starCount * 3);
+    /* ---------- Rising data particles ---------- */
+    const PN = isSmall ? 350 : 800;
+    const pPos = new Float32Array(PN * 3), pSpeed = new Float32Array(PN);
+    const pr = seeded(11);
+    for (let i = 0; i < PN; i++) {
+      pPos.set([(pr() - 0.5) * 90 + offX, pr() * 40, (pr() - 0.5) * 60 - 8], i * 3);
+      pSpeed[i] = 0.02 + pr() * 0.06;
+    }
+    const pGeo = new T.BufferGeometry();
+    pGeo.setAttribute("position", new T.BufferAttribute(pPos, 3));
+    const particles = new T.Points(pGeo, new T.PointsMaterial({ color: 0xf6d98f, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.65 }));
+    scene.add(particles);
+
+    // Starfield backdrop
+    const SN = isSmall ? 400 : 900;
+    const sp = new Float32Array(SN * 3);
     const sr = seeded(99);
-    for (let i = 0; i < starCount; i++) {
-      sp.set([(sr() - 0.5) * 260, 12 + sr() * 90, -120 + sr() * 150], i * 3);
-    }
+    for (let i = 0; i < SN; i++) sp.set([(sr() - 0.5) * 260, 20 + sr() * 90, -140 + sr() * 120], i * 3);
     const starGeo = new T.BufferGeometry();
     starGeo.setAttribute("position", new T.BufferAttribute(sp, 3));
-    const stars = new T.Points(starGeo, new T.PointsMaterial({ color: 0xcfd8ea, size: 1.2, sizeAttenuation: false, transparent: true, opacity: 0.7 }));
+    const stars = new T.Points(starGeo, new T.PointsMaterial({ color: 0xcfd8ea, size: 1.1, sizeAttenuation: false, transparent: true, opacity: 0.55 }));
     scene.add(stars);
 
-    // Sizing
+    /* ---------- Sizing & interaction ---------- */
     const resize = () => {
       const w = canvas.clientWidth, h = canvas.clientHeight;
       renderer.setSize(w, h, false);
@@ -361,48 +370,121 @@
     resize();
     window.addEventListener("resize", resize);
 
-    // Interaction
     let mx = 0, my = 0, cmx = 0, cmy = 0;
+    const ndc = new T.Vector2(-10, -10);
+    const ray = new T.Raycaster();
+    const floor = new T.Plane(new T.Vector3(0, 1, 0), 0);
+    const hit = new T.Vector3(9999, 0, 9999), hitSmooth = new T.Vector3(9999, 0, 9999);
+    let pointerActive = false;
     window.addEventListener("pointermove", (e) => {
       mx = e.clientX / window.innerWidth - 0.5;
       my = e.clientY / window.innerHeight - 0.5;
+      const r = canvas.getBoundingClientRect();
+      ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+      pointerActive = e.clientY < r.bottom;
     }, { passive: true });
+
+    // Click / tap sends a shockwave through the terrain
+    const waves = [];
+    canvas.parentElement.addEventListener("pointerdown", (e) => {
+      if (e.target.closest("a, button")) return;
+      if (hit.x < 9000) waves.push({ x: hit.x, z: hit.z, t0: performance.now() / 1000 });
+      if (waves.length > 4) waves.shift();
+    });
 
     let visible = true;
     new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(canvas);
 
     const easeOut = (t) => 1 - Math.pow(1 - Math.min(Math.max(t, 0), 1), 3);
     const t0 = performance.now();
-    const offsetX = isSmall ? 0 : 12; // shift city right on desktop so text sits left
+    let lastPanelDraw = 0;
 
     const render = (now) => {
-      const t = reduceMotion ? 10 : (now - t0) / 1000;
-      const growT = t - 0.6;
+      const t = reduceMotion ? 6 : (now - t0) / 1000;
+      const nowS = now / 1000;
+      const intro = easeOut((t - 0.4) / 2.2);
 
-      towers.forEach((tw) => (tw.obj.scale.y = Math.max(0.001, tw.target * easeOut((growT - tw.delay) / 1.4))));
-      hero.scale.y = Math.max(0.001, easeOut((growT - 0.1) / 2));
+      // pointer → floor intersection for the ripple
+      if (pointerActive && finePointer && !reduceMotion) {
+        ray.setFromCamera(ndc, camera);
+        if (ray.ray.intersectPlane(floor, hit) === null) hit.set(9999, 0, 9999);
+      } else hit.set(9999, 0, 9999);
+      hitSmooth.lerp(hit, hit.x > 9000 ? 1 : 0.12);
 
-      const lineP = easeOut((growT - 1.8) / 2.2);
-      tube.setDrawRange(0, Math.floor(tubeIndexCount * lineP / 6) * 6);
-      dots.forEach((d) => d.scale.setScalar(lineP >= d.userData.t ? Math.min(1, (lineP - d.userData.t) * 12 + 0.001) : 0.001));
-      if (lineP >= 1) {
-        runner.visible = true;
-        const u = ((t * 0.06) % 1);
-        runner.position.copy(curve.getPointAt(u));
+      for (let i = 0; i < COUNT; i++) {
+        const c = cells[i];
+        let h = 1.4
+          + Math.sin(c.x * 0.22 + t * 0.7) * Math.cos(c.z * 0.28 + t * 0.5) * 1.6
+          + Math.sin(c.x * 0.09 - c.z * 0.13 + t * 0.35) * 1.4
+          + Math.max(0, Math.sin(c.x * 0.5 + c.z * 0.4)) * 0.6;
+        // cursor hill
+        const dx = c.x - hitSmooth.x, dz = c.z - hitSmooth.z;
+        const d2 = dx * dx + dz * dz;
+        h += 6.5 * Math.exp(-d2 / 22);
+        // click shockwaves
+        for (const w of waves) {
+          const age = nowS - w.t0;
+          const dist = Math.hypot(c.x - w.x, c.z - w.z);
+          const front = age * 16;
+          h += Math.max(0, 3.2 * Math.exp(-((dist - front) ** 2) / 6) * Math.exp(-age * 1.1));
+        }
+        // intro: rise from the centre outwards
+        const delay = Math.hypot(c.x - offX, c.z + 6) / 40;
+        const k = easeOut((t - 0.3 - delay) / 1.4);
+        h = Math.max(0.08, h * k);
+        // depth fade: shorter towards the front so text stays readable
+        dummy.position.set(c.x, 0, c.z);
+        dummy.scale.set(1, h, 1);
+        dummy.updateMatrix();
+        bars.setMatrixAt(i, dummy.matrix);
+        const n = Math.min(h / 8, 1);
+        if (n < 0.5) tmpC.copy(lowC).lerp(midC, n * 2);
+        else tmpC.copy(midC).lerp(highC, (n - 0.5) * 2);
+        bars.setColorAt(i, tmpC);
+      }
+      bars.instanceMatrix.needsUpdate = true;
+      if (bars.instanceColor) bars.instanceColor.needsUpdate = true;
+      while (waves.length && nowS - waves[0].t0 > 4) waves.shift();
+
+      // panels float, gently face the camera, fade in after the terrain
+      panels.forEach(({ p, base, bob }) => {
+        p.mesh.position.set(base.x, base.y + Math.sin(t * 0.8 + bob) * 0.6, base.z);
+        p.mesh.lookAt(camera.position);
+        p.mesh.rotateY(Math.sin(t * 0.4 + bob) * 0.12);
+        p.mesh.material.opacity = easeOut((t - 1.6 - bob * 0.15) / 1.2) * (isSmall ? 0.3 : 0.95);
+      });
+      if (!reduceMotion && now - lastPanelDraw > 900) {
+        lastPanelDraw = now;
+        series.shift();
+        series.push(Math.max(30, Math.min(110, series[series.length - 1] + (Math.random() - 0.4) * 9)));
+        barsData.forEach((v, i) => (barsData[i] = Math.max(35, Math.min(98, v + (Math.random() - 0.5) * 8))));
+        mix = mix.map((v) => Math.max(8, v + (Math.random() - 0.5) * 3));
+        linePanel.redraw(t); barPanel.redraw(t); donutPanel.redraw(t);
       }
 
-      beacon.intensity = 1.6 + Math.sin(t * 3) * 0.8;
+      // particles drift upward and recycle
+      if (!reduceMotion) {
+        for (let i = 0; i < PN; i++) {
+          pPos[i * 3 + 1] += pSpeed[i];
+          if (pPos[i * 3 + 1] > 40) pPos[i * 3 + 1] = 0;
+        }
+        pGeo.attributes.position.needsUpdate = true;
+      }
       stars.rotation.y = t * 0.004;
 
+      // camera: slow orbit + mouse parallax + scroll fly-over
       cmx += (mx - cmx) * 0.04;
       cmy += (my - cmy) * 0.04;
-      const orbit = reduceMotion ? 0 : Math.sin(t * 0.08) * 0.18 + cmx * 0.35;
-      // scroll-driven fly-over: camera swoops forward and climbs as the hero scrolls away
       const sp = reduceMotion ? 0 : Math.min(window.scrollY / window.innerHeight, 1);
       const spE = sp * sp * (3 - 2 * sp);
-      const radius = (isSmall ? 95 : 84) * (1 - spE * 0.45);
-      camera.position.set(Math.sin(orbit + spE * 0.6) * radius - offsetX * 0.5 * (1 - spE), 20 + cmy * -6 + Math.max(0, 3 - t) * 4 + spE * 34, Math.cos(orbit + spE * 0.6) * radius - 8);
-      camera.lookAt((-offsetX * 0.5 - (isSmall ? 0 : 12)) * (1 - spE), heroHeight * 0.48 - spE * 6, -8);
+      const orbit = reduceMotion ? 0 : Math.sin(t * 0.07) * 0.16 + cmx * 0.3;
+      const radius = (isSmall ? 62 : 48) * (1 - spE * 0.4);
+      camera.position.set(
+        Math.sin(orbit) * radius + (isSmall ? 0 : offX * 0.3),
+        (isSmall ? 30 : 24) + cmy * -5 + Math.max(0, 2.5 - t) * 6 - spE * 10,
+        Math.cos(orbit) * radius
+      );
+      camera.lookAt(isSmall ? 0 : offX * 0.15 - 9 * (1 - spE), 4 + spE * 2, -8);
 
       renderer.render(scene, camera);
     };
@@ -835,44 +917,44 @@
       title: "Retail Performance Dashboard — Advanced Power BI Solution",
       tag: "Power BI · DAX", tool: ["BI", "i-pbi"], cats: ["powerbi", "retail"],
       img: "assets/retail_bi.png",
-      blurb: "Executive dashboard giving branch-level visibility into revenue, gross margin, SKU movement and growth (MTD, YTD, YoY).",
+      blurb: "An executive dashboard that shows revenue, gross margin, SKU movement and growth (MTD, YTD, YoY) for every branch at a glance.",
       chips: ["Star schema", "DAX time intelligence", "Branch ranking", "Margin velocity"],
-      problem: "Leadership could not compare branch revenue and margin quickly. Reports were built by hand and were often days old.",
-      approach: "Built a star-schema model with DAX time-intelligence measures (MTD, YTD, YoY), dynamic branch ranking and drill-through from category to SKU.",
-      outcome: "One place to see revenue, margin and SKU performance, ready for the morning trading meeting.",
+      problem: "Comparing branch revenue and margin was slow. Reports were assembled by hand and were often days out of date by the time they were read.",
+      approach: "Designed a star-schema model with DAX time-intelligence measures (MTD, YTD, YoY), dynamic branch ranking and drill-through from category down to SKU.",
+      outcome: "A single, always-current view of revenue, margin and SKU performance, ready before the morning trading meeting.",
       links: [["Case study (PDF)", "assets/Retail Performance Dashboard - Advanced Power BI Solution.pdf"], ["GitHub", "https://github.com/MOHDSALAL-KK/RETAIL-DASHBOARD"]],
     },
     {
       title: "E-Commerce Product & Order Insights Dashboard (Amazon)",
       tag: "E-commerce · Power BI", tool: ["BI", "i-pbi"], cats: ["powerbi", "retail"],
       img: "assets/project-2.png",
-      blurb: "Analysis of fulfillment speed, order status, return rates, regional demand and seller margins for an Amazon catalogue.",
+      blurb: "Order analytics for an Amazon catalog, covering fulfillment speed, order status, return rates, regional demand and seller margins.",
       chips: ["Fulfillment speed", "Returns analysis", "Geo heatmap", "Seller margins"],
-      problem: "Order, return and fulfillment data sat in separate exports, so it was hard to see where margin was being lost.",
-      approach: "Cleaned and modelled the order data, then built visuals for fulfillment time, return reasons, demand by region and margin by seller.",
-      outcome: "Showed which categories and regions had the most returns and the slowest fulfillment, so action could focus there.",
+      problem: "Order, return and fulfillment data sat in separate exports, which made it hard to see where margin was leaking.",
+      approach: "Cleaned and modeled the order data, then built visuals for fulfillment time, return reasons, regional demand and margin by seller.",
+      outcome: "Pinpointed the categories and regions with the highest returns and slowest fulfillment, so effort could go where it matters most.",
       links: [["Case study (PDF)", "assets/E-commerce Product and Order Insights Dashboard(Amazon).pdf"], ["GitHub", "https://github.com/MOHDSALAL-KK/E-commerce-Product-and-Order-Insights-Dashboard-Amazon"]],
     },
     {
       title: "Retail Sales KPI Dashboard — Google Sheets",
       tag: "Google Sheets · Cloud", tool: ["GS", "i-gs"], cats: ["sheets", "retail"],
       img: "assets/retail_gsheet.png",
-      blurb: "Lightweight cloud dashboard tracking shift performance, daily target achievement, cashier efficiency and basket size.",
+      blurb: "A lightweight cloud dashboard that tracks shift performance, daily target achievement, cashier efficiency and basket size.",
       chips: ["QUERY()", "IMPORTRANGE", "Automated sync", "Conditional formatting"],
-      problem: "Branch teams needed same-day KPIs but did not have Power BI licences or heavy desktop software.",
-      approach: "Built a Google Sheets dashboard using QUERY and IMPORTRANGE that pulls from shared data sheets, with target-versus-actual formatting.",
-      outcome: "Shift and branch KPIs that any team can open in a browser, with no extra software or licence cost.",
+      problem: "Branch teams needed same-day KPIs but had no Power BI licenses or desktop BI software.",
+      approach: "Built a Google Sheets dashboard with QUERY and IMPORTRANGE that pulls from shared data sheets and highlights target versus actual.",
+      outcome: "Shift and branch KPIs that any team can open in a browser, at no extra software or license cost.",
       links: [["Case study (PDF)", "assets/Retail Sales KPI Dashboard.pdf"], ["Live sheet", "https://docs.google.com/spreadsheets/d/1iasL8M_5HJU3oCQYPTZA9xEzoM5mtYS1j_X3eGhvoMs/edit?gid=1153479738#gid=1153479738"]],
     },
     {
       title: "Employee Attrition — HR Analysis Dashboard",
       tag: "HR analytics · Power BI", tool: ["BI", "i-pbi"], cats: ["powerbi"],
       img: "assets/hr.png",
-      blurb: "Diagnostic HR dashboard showing what drives attrition: job satisfaction, tenure groups and role-level risk.",
+      blurb: "A diagnostic HR dashboard that reveals what drives attrition across job satisfaction, tenure and role.",
       chips: ["Turnover risk", "Satisfaction index", "Tenure cohorts", "Diagnostic analysis"],
-      problem: "HR could see that turnover was high but not which roles, tenure groups or satisfaction factors were behind it.",
-      approach: "Broke attrition down by department, role, tenure and satisfaction scores, with interactive filters to compare groups.",
-      outcome: "Identified the highest-risk groups so HR could target retention efforts.",
+      problem: "Turnover was clearly high, but it was not clear which roles, tenure groups or satisfaction factors were driving it.",
+      approach: "Broke attrition down by department, role, tenure and satisfaction score, with interactive filters to compare any two groups.",
+      outcome: "Identified the highest-risk groups, giving HR a clear starting point for targeted retention.",
       links: [["Case study (PDF)", "assets/Employee_Attrition_HR_Analysis_Dashboard.pdf"], ["GitHub", "https://github.com/MOHDSALAL-KK/Employee_Attrition_HR_Analysis_Dashboard"]],
     },
   ];
@@ -964,7 +1046,7 @@
     const f = e.target;
     const name = f.name.value.trim(), email = f.email.value.trim(), msg = f.message.value.trim(), type = f.type.value;
     if (!name || !email || !msg || !/^\S+@\S+\.\S+$/.test(email)) {
-      toast("Please fill in your name, a valid email and a message.");
+      toast("Please add your name, a valid email and a short message.");
       return;
     }
     const subject = `${type} — ${name}`;
