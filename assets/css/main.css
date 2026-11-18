@@ -1,150 +1,163 @@
 /* ===================================================================
-   Mohammed Salal KK - Portfolio Stylesheet
-   Modern, Sleek, Data-Driven UI with Motion Design & Dubai Tech Vibes
+   Mohammed Salal KK - Personal Portfolio Stylesheet
+   Design Identity: Dubai Meets Data Analytics | Editorial Light Luxury
+   Colors: Warm Ivory, Deep Navy, Dubai Turquoise, Champagne Gold
    =================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: 'Outfit', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
-  /* Color Palette - Sleek Dark Bluish-Black (#0a0f1d vibe) */
-  --bg-dark: #070b16;
-  --bg-card: rgba(12, 18, 34, 0.75);
-  --bg-card-hover: rgba(18, 28, 52, 0.9);
-  --border-subtle: rgba(56, 189, 248, 0.12);
-  --border-highlight: rgba(56, 189, 248, 0.4);
+  /* Dubai Meets Data Analytics Light Color Palette */
+  --bg-primary: #F8F7F3;       /* Warm Ivory */
+  --bg-secondary: #FFFFFF;     /* Pure White */
+  --bg-sand: #EFE9DF;          /* Warm Sand / Alabaster */
+  --bg-sand-light: #F6F3EE;    /* Soft Sand Accent */
   
-  --accent-cyan: #38bdf8;
-  --accent-blue: #3b82f6;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-purple: #818cf8;
+  --text-primary: #172B3A;     /* Deep Navy */
+  --text-secondary: #64748B;   /* Muted Slate */
+  --text-muted: #94A3B8;       /* Subtle Slate */
+  
+  --accent-turquoise: #169B9B; /* Dubai Turquoise */
+  --accent-teal-dark: #107B7B;
+  --accent-turquoise-soft: rgba(22, 155, 155, 0.08);
+  
+  --accent-gold: #C5A46D;      /* Muted Champagne Gold */
+  --accent-gold-dark: #9F7D46;
+  --accent-gold-soft: rgba(197, 164, 109, 0.12);
+  
+  --border-light: #E5E7EB;     /* Soft Grey */
+  --border-subtle: rgba(23, 43, 58, 0.08);
+  --border-focus: #169B9B;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(23, 43, 58, 0.04);
+  --shadow-md: 0 4px 16px -2px rgba(23, 43, 58, 0.06), 0 2px 4px -1px rgba(23, 43, 58, 0.03);
+  --shadow-lg: 0 12px 32px -4px rgba(23, 43, 58, 0.08), 0 4px 12px -2px rgba(23, 43, 58, 0.04);
+  --shadow-hover: 0 20px 40px -8px rgba(23, 43, 58, 0.12), 0 0 1px 1px rgba(22, 155, 155, 0.2);
 }
 
 /* Base resets & typography */
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
-  background-color: var(--bg-dark);
-  color: #f1f5f9;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   overflow-x: hidden;
-  background-color: #060a14;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56, 189, 248, 0.16), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 90% 25%, rgba(59, 130, 246, 0.12), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 10% 70%, rgba(16, 185, 129, 0.08), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 75% 85%, rgba(99, 102, 241, 0.09), transparent 60%);
-  background-attachment: fixed;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #060913;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
-  border: 1px solid rgba(56, 189, 248, 0.2);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
-}
-
-/* Typography Helpers */
+/* Editorial Typography */
 h1, h2, h3, h4, h5, h6, .font-heading {
   font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 .font-mono {
   font-family: var(--font-mono);
 }
 
-/* Text Gradients */
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, #ffffff 40%, #fbbf24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Dubai Architectural & Data Grid Background */
-.dubai-grid-bg {
-  background-size: 48px 48px;
+/* Subtle Architectural Grid Background */
+.dubai-architectural-grid {
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, rgba(23, 43, 58, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 43, 58, 0.03) 1px, transparent 1px);
 }
 
-/* Glassmorphism Cards with Card-Lifting & Ambient Glow */
-.glass-panel {
-  background: rgba(12, 19, 36, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.25rem;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow;
+/* Subtle Geometric Decorative Lattice */
+.dubai-lattice-pattern {
+  background-image: radial-gradient(rgba(197, 164, 109, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.glass-panel:hover {
-  background: rgba(18, 28, 52, 0.85);
-  border-color: rgba(56, 189, 248, 0.35);
-  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.7), 0 0 24px rgba(56, 189, 248, 0.12);
-  transform: translateY(-4px);
+/* Premium Light Editorial Card */
+.editorial-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Text Gradients */
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.editorial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(22, 155, 155, 0.35);
 }
 
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Warm Sand Section Container */
+.sand-surface {
+  background-color: var(--bg-sand);
+  border-top: 1px solid rgba(23, 43, 58, 0.06);
+  border-bottom: 1px solid rgba(23, 43, 58, 0.06);
 }
 
-/* Typewriter & Cursor Animation */
-.typewriter-cursor {
-  display: inline-block;
-  margin-left: 2px;
-  font-weight: 300;
-  color: #38bdf8;
-  animation: blink 0.9s infinite;
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-sand);
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-turquoise);
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+/* Text Highlights */
+.text-turquoise {
+  color: var(--accent-turquoise);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.bg-turquoise {
+  background-color: var(--accent-turquoise);
+}
+
+.bg-sand {
+  background-color: var(--bg-sand);
+}
+
+.border-turquoise {
+  border-color: var(--accent-turquoise);
+}
+
+/* Hero Badge Pulse */
+@keyframes pulse-ring-light {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 155, 155, 0.6); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(22, 155, 155, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 155, 155, 0); }
+}
+
+.pulse-badge-light {
+  animation: pulse-ring-light 2.2s infinite;
 }
 
 /* Scroll-Driven Entrance Animations */
 .reveal-init {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-visible {
@@ -152,100 +165,56 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   transform: translateY(0);
 }
 
-.stagger-1 { transition-delay: 80ms; }
-.stagger-2 { transition-delay: 160ms; }
-.stagger-3 { transition-delay: 240ms; }
-.stagger-4 { transition-delay: 320ms; }
-.stagger-5 { transition-delay: 400ms; }
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.40s; }
 
-/* Interactive Experience Accordion */
+/* Filter Tabs */
+.filter-tab {
+  transition: all 0.25s ease;
+}
+
+.filter-tab.active {
+  background-color: var(--accent-turquoise);
+  color: #FFFFFF;
+  border-color: var(--accent-turquoise);
+  box-shadow: 0 4px 14px rgba(22, 155, 155, 0.25);
+}
+
+.competency-tab.active {
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  border-color: var(--text-primary);
+  box-shadow: 0 4px 14px rgba(23, 43, 58, 0.2);
+}
+
+/* Accordion Transitions */
 .accordion-content {
   max-height: 0;
-  opacity: 0;
   overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 0.35s ease,
-              margin-top 0.35s ease;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
 }
 
 .accordion-item.active .accordion-content {
-  max-height: 800px;
+  max-height: 1200px;
   opacity: 1;
-  margin-top: 1rem;
 }
 
 .accordion-chevron {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s ease;
 }
 
 .accordion-item.active .accordion-chevron {
   transform: rotate(180deg);
+  color: var(--accent-turquoise);
 }
 
-/* Animated Proficiency Progress Bars */
-.progress-bar-fill {
-  width: 0%;
-  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Terminal Styles */
-.terminal-window {
-  background: #080d19;
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  border-radius: 0.85rem;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.12);
-  font-family: var(--font-mono);
-}
-
-.terminal-header {
-  background: #0f172a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.65rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.terminal-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.terminal-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 16px;
-  background-color: #38bdf8;
-  vertical-align: middle;
-  animation: blink 1s step-start infinite;
-}
-
-/* Pulsing Badge for Status */
-@keyframes pulse-ring {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-
-.pulse-badge {
-  animation: pulse-ring 2s infinite;
-}
-
-/* Active Filter Tabs */
-.filter-tab.active {
-  background: rgba(56, 189, 248, 0.18);
-  border-color: #38bdf8;
-  color: #38bdf8;
-  box-shadow: 0 0 16px -2px rgba(56, 189, 248, 0.35);
-}
-
-.competency-tab.active {
-  background: rgba(56, 189, 248, 0.18);
-  border-color: #38bdf8;
-  color: #38bdf8;
-  box-shadow: 0 0 16px -2px rgba(56, 189, 248, 0.35);
+/* Interactive Mini Chart Bar Transitions */
+.interactive-bar {
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
 }
 
 /* Toast Notifications */
@@ -277,11 +246,10 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 
 .modal-content-box {
-  transform: scale(0.95) translateY(12px);
+  transform: scale(0.96) translateY(10px);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-backdrop.open .modal-content-box {
   transform: scale(1) translateY(0);
 }
-
