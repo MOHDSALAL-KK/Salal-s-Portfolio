@@ -74,7 +74,7 @@
 .marquee { transform: perspective(900px) rotateX(10deg) rotate(-1.2deg) scale(1.04); margin-block: 10px; }
 
 /* Stat tiles with depth */
-.stats { grid-template-columns: repeat(3, 1fr) !important; }
+.stats { grid-template-columns: repeat(2, 1fr) !important; }
 @media (max-width: 640px) { .stats { grid-template-columns: 1fr !important; } }
 .stats { overflow: visible; background: transparent; border: 0; gap: 14px; border-radius: 0; }
 .stat { border-radius: 20px; border: 1px solid var(--line); background: linear-gradient(160deg, var(--bg-3), var(--bg)); transform-style: preserve-3d; }
