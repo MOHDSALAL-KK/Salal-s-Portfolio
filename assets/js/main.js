@@ -397,9 +397,12 @@
       cmx += (mx - cmx) * 0.04;
       cmy += (my - cmy) * 0.04;
       const orbit = reduceMotion ? 0 : Math.sin(t * 0.08) * 0.18 + cmx * 0.35;
-      const radius = isSmall ? 95 : 84;
-      camera.position.set(Math.sin(orbit) * radius - offsetX * 0.5, 20 + cmy * -6 + Math.max(0, 3 - t) * 4, Math.cos(orbit) * radius - 8);
-      camera.lookAt(-offsetX * 0.5 - (isSmall ? 0 : 12), heroHeight * 0.48, -8);
+      // scroll-driven fly-over: camera swoops forward and climbs as the hero scrolls away
+      const sp = reduceMotion ? 0 : Math.min(window.scrollY / window.innerHeight, 1);
+      const spE = sp * sp * (3 - 2 * sp);
+      const radius = (isSmall ? 95 : 84) * (1 - spE * 0.45);
+      camera.position.set(Math.sin(orbit + spE * 0.6) * radius - offsetX * 0.5 * (1 - spE), 20 + cmy * -6 + Math.max(0, 3 - t) * 4 + spE * 34, Math.cos(orbit + spE * 0.6) * radius - 8);
+      camera.lookAt((-offsetX * 0.5 - (isSmall ? 0 : 12)) * (1 - spE), heroHeight * 0.48 - spE * 6, -8);
 
       renderer.render(scene, camera);
     };

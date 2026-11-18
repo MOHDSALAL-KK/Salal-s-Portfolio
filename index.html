@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Reem+Kufi:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/3d.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,7 +81,7 @@
     <section class="hero" id="hero">
       <canvas id="skyline" aria-hidden="true"></canvas>
       <div class="container">
-        <div class="hero-content">
+        <div class="hero-content" id="heroContent">
           <div class="hero-status">
             <span class="chip"><span class="chip-dot"></span>Open to opportunities</span>
             <span class="chip">📍 Dubai, UAE</span>
@@ -88,8 +89,8 @@
           </div>
           <p class="marhaba">مرحباً <span>MARHABA — WELCOME</span></p>
           <h1>
-            <span class="line"><span>Mohammed</span></span>
-            <span class="line"><span><span class="grad">Salal KK</span></span></span>
+            <span class="line"><span class="x3d" data-text="Mohammed">Mohammed</span></span>
+            <span class="line"><span class="x3d" data-text="Salal KK"><span class="grad">Salal KK</span></span></span>
           </h1>
           <div class="role" aria-live="polite"><span id="roleText">MIS &amp; Data Analyst</span><span class="caret"></span></div>
           <p class="hero-lead">
@@ -149,6 +150,28 @@
       </div>
     </section>
 
+    <!-- ================= CAREER GLOBE ================= -->
+    <section class="section globe-band" id="journey" style="padding-block: 90px 0;">
+      <div class="container globe-grid">
+        <div class="globe-stage reveal">
+          <canvas id="globe" aria-label="3D globe showing career path from India to Qatar to the UAE"></canvas>
+          <div class="globe-labels" id="globeLabels"></div>
+          <span class="globe-hint">Drag to rotate</span>
+        </div>
+        <div class="globe-copy">
+          <span class="eyebrow reveal">The journey</span>
+          <h2 class="split reveal" data-delay="1">From Kerala to Doha to <span class="grad">the UAE.</span></h2>
+          <p class="reveal" data-delay="2">Each move brought me closer to GCC retail, where the data is large and fast-moving and drives real commercial decisions.</p>
+          <ol class="stops">
+            <li class="reveal" data-delay="1" data-stop="0"><b>2018–2022 · Kerala, India</b><span>BSc Computer Science, then Business Data Analyst at Homeland Traders</span></li>
+            <li class="reveal" data-delay="2" data-stop="1"><b>2022–2024 · Rajasthan, India</b><span>MSc Big Data Analytics, plus Data Analyst at CodeRythm</span></li>
+            <li class="reveal" data-delay="3" data-stop="2"><b>2024–2025 · Doha, Qatar</b><span>Data Analyst, Al Anees Electronics</span></li>
+            <li class="reveal" data-delay="4" data-stop="3"><b>2025–now · Abu Dhabi &amp; Dubai, UAE</b><span>MIS &amp; Data Analyst, Al Madina Group (19 branches)</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= ABOUT ================= -->
     <section class="section" id="about">
       <div class="pattern"></div>
@@ -193,10 +216,23 @@
     <!-- ================= TOOLKIT STUDIO ================= -->
     <section class="section studio" id="studio">
       <div class="container">
+        <div class="studio-head">
         <div class="section-head">
           <span class="eyebrow reveal">Interactive toolkit</span>
-          <h2 class="reveal" data-delay="1">Try the tools <span class="grad">I use every day.</span></h2>
+          <h2 class="split reveal" data-delay="1">Try the tools <span class="grad">I use every day.</span></h2>
           <p class="reveal" data-delay="2">These are working mini demos of my daily workflow. Click the slicers, select cells, run the query. All figures are illustrative sample data.</p>
+        </div>
+        <div class="cube-scene reveal" data-delay="2" aria-hidden="true">
+          <div class="cube-float"><div class="cube" id="toolCube">
+            <div class="face f-front" data-tool="pbi"><i class="i-pbi">BI</i><span>Power BI</span></div>
+            <div class="face f-right" data-tool="excel"><i class="i-excel">X</i><span>Excel</span></div>
+            <div class="face f-back" data-tool="sql"><i class="i-sql">SQL</i><span>SQL</span></div>
+            <div class="face f-left" data-tool="py"><i class="i-py">Py</i><span>Python</span></div>
+            <div class="face f-top"><i class="i-gs">GS</i><span>Sheets</span></div>
+            <div class="face f-bottom"><i class="i-pbi">fx</i><span>DAX</span></div>
+          </div></div>
+          <div class="cube-shadow"></div>
+        </div>
         </div>
 
         <div class="studio-tabs reveal" role="tablist" aria-label="Tools">
@@ -206,7 +242,7 @@
           <button class="studio-tab" role="tab" aria-selected="false" data-tool="py" aria-controls="pane-py"><i class="i-py">Py</i>Python</button>
         </div>
 
-        <div class="window reveal" data-delay="1">
+        <div class="window-stage"><div class="window" id="studioWindow">
           <div class="window-bar">
             <div class="dots"><span></span><span></span><span></span></div>
             <div class="window-title" id="windowTitle">Retail_Performance.pbix — Executive Overview</div>
@@ -299,7 +335,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div></div>
       </div>
     </section>
 
@@ -308,7 +344,7 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow reveal">Core competencies</span>
-          <h2 class="reveal" data-delay="1">Retail knowledge plus <span class="grad">technical skills.</span></h2>
+          <h2 class="split reveal" data-delay="1">Retail knowledge plus <span class="grad">technical skills.</span></h2>
           <p class="reveal" data-delay="2">My skills fall into five areas, from retail operations to statistical forecasting. Open an area to see the detail.</p>
         </div>
         <div class="skills-grid">
@@ -394,7 +430,7 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow reveal">Career</span>
-          <h2 class="reveal" data-delay="1">Experience in <span class="grad">GCC retail and e-commerce.</span></h2>
+          <h2 class="split reveal" data-delay="1">Experience in <span class="grad">GCC retail and e-commerce.</span></h2>
           <p class="reveal" data-delay="2">Four roles across the UAE, Qatar and India, each closer to the commercial side of the business.</p>
         </div>
 
@@ -504,7 +540,7 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow reveal">Selected work</span>
-          <h2 class="reveal" data-delay="1">Dashboards built for <span class="grad">real business decisions.</span></h2>
+          <h2 class="split reveal" data-delay="1">Dashboards built for <span class="grad">real business decisions.</span></h2>
           <p class="reveal" data-delay="2">Case studies across Power BI, e-commerce, Google Sheets and HR analytics. Open any card for the problem, the approach and the result.</p>
         </div>
         <div class="filters reveal" id="filters">
@@ -522,7 +558,7 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow reveal">Education &amp; credentials</span>
-          <h2 class="reveal" data-delay="1">A strong base in <span class="grad">statistics and computer science.</span></h2>
+          <h2 class="split reveal" data-delay="1">A strong base in <span class="grad">statistics and computer science.</span></h2>
         </div>
         <div class="edu-grid">
           <div class="edu-col">
@@ -575,7 +611,7 @@
           <div class="contact-grid">
             <div>
               <span class="eyebrow">Let's talk</span>
-              <h2>Looking for a data analyst <span class="grad">in Dubai?</span></h2>
+              <h2 class="split">Looking for a data analyst <span class="grad">in Dubai?</span></h2>
               <p class="contact-lead">I am based in Dubai, available now, and hold a valid UAE Employment Visa. I am interested in MIS, senior data analyst, BI and inventory analytics roles across the UAE.</p>
               <div class="channels">
                 <a class="channel" href="https://wa.me/971586582599?text=Hi%20Mohammed%20Salal%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener">
@@ -669,5 +705,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/3d.js" defer></script>
 </body>
 </html>
